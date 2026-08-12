@@ -166,7 +166,7 @@ const Header = () => {
                   MK SRINIDHI
                 </span>
                 <span className="text-[9px] md:text-[10px] text-gray-500 font-semibold tracking-wider">
-                  SURVEYORS & BUILDERS PVT. LTD.
+                  <span className="text-brand-red font-bold">SURVEYOURS & BUILDERS</span> PVT. LTD.
                 </span>
               </div>
             </Link>

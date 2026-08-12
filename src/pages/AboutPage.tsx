@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "@/components/Layout";
 import PageSEO from "@/components/PageSEO";
 import CTABanner from "@/components/CTABanner";
+import { Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -10,201 +11,499 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
-import { Link } from "react-router-dom";
-import { Award, FileText, Users, Calendar, CheckCircle, DollarSign, UserCheck } from "lucide-react"; // Import icons
-import dassImage from "@/assets/images/dass.png";
-import poogothaiImage from "@/assets/images/poogothai.png";
-import kumarImage from "@/assets/images/kumar.png";
+import {
+  Briefcase,
+  Building2,
+  Smile,
+  Users,
+  Compass,
+  Eye,
+  Calendar,
+  Milestone,
+  CheckCircle,
+  FileText,
+  Clock,
+  ShieldCheck,
+  TrendingUp,
+  Cpu,
+  UserCheck,
+  Ruler,
+  Award,
+} from "lucide-react";
+import homeAboutImage from "@/assets/images/home_about.png";
+import precision1Image from "@/assets/images/precision1.png";
+import surveyingAboutImage from "@/assets/images/surveying_about_image.png";
 import ResponsiveImage from "@/components/ResponsiveImage";
 
 const AboutPage = () => {
   return (
     <Layout>
       <PageSEO
-        title="About MK Srinidhi Surveyors and Builders Pvt. Ltd."
-        description="Learn about MK Srinidhi Surveyors and Builders Pvt. Ltd. - our story, mission, values, milestones, and why choose us for your construction and surveying needs."
-        keywords="about us, MK Srinidhi Surveyors and Builders, company history, mission, vision, values, construction company, surveying firm, Bangalore, Bangalore, India"
+        title="About Us | MK Srinidhi Surveyors & Builders Pvt. Ltd."
+        description="Learn about MK Srinidhi Surveyors & Builders Pvt. Ltd., our journey, experienced team, milestones, certifications, and commitment to precision, quality, and excellence."
+        keywords="about us, MK Srinidhi, construction company, surveying firm, milestones, certifications, engineers, Chennai, Tamil Nadu, India"
       />
 
+      {/* Hero Section & Breadcrumbs */}
+      <section className="relative bg-[#F4F6F9] pt-12 pb-12 lg:py-0 min-h-fit lg:min-h-[580px] flex items-center overflow-hidden mt-[48px] md:mt-0">
+        {/* Right side absolute image container (Desktop only) with clip-path diagonal shape */}
+        <div 
+          className="absolute right-0 top-0 bottom-0 h-full w-[52%] hidden lg:block overflow-hidden"
+          style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)' }}
+        >
+          <ResponsiveImage
+            src={surveyingAboutImage}
+            alt="Professional surveyors with total station equipment"
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-      <div className="container mx-auto px-4 py-8 pt-20">
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>About Us</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <div className="container mx-auto px-4 relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Hero Column */}
+            <div className="lg:col-span-7 space-y-6 py-6 lg:py-12">
+              {/* Breadcrumb */}
+              <Breadcrumb className="mb-2">
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink asChild>
+                      <Link to="/" className="text-gray-500 hover:text-brand-orange">
+                        Home
+                      </Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage className="text-[#0B132B] font-semibold">About Us</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
 
-        {/* Our Story / Introduction */}
-        <section id="our-story" className="py-12">
-          <h2 className="text-3xl font-bold text-center mb-8">Our Story</h2>
-          <div className="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed">
-            <p className="mb-4">
-              Founded in 2018, MK Srinidhi Surveyors and Builders Pvt. Ltd. has grown from a vision to a leading name in the construction and surveying industry. Our journey began with a commitment to precision, integrity, and client satisfaction.
-            </p>
-            <p className="mb-4">
-              <strong>Mission:</strong> To deliver exceptional construction and surveying services, ensuring accuracy, durability, and sustainable solutions for every project.
-            </p>
-            <p className="mb-4">
-              <strong>Vision:</strong> To be the most trusted and innovative construction and surveying firm, recognized for our unwavering commitment to quality and client success.
-            </p>
-            <p className="mb-4">
-              <strong>Values:</strong> Integrity, Excellence, Innovation, Collaboration, and Client-Centricity.
-            </p>
-            <p>
-              Our core strengths lie in our experienced team, cutting-edge technology, and a deep understanding of both traditional and modern construction techniques. What makes MK Srinidhi Surveyors and Builders unique is our holistic approach, combining meticulous surveying with robust construction, ensuring seamless project execution from concept to completion.
-            </p>
-          </div>
-        </section>
+              {/* Title */}
+              <div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0B132B]">
+                  About Us
+                </h1>
+                <div className="w-16 h-1.5 bg-brand-orange mt-4"></div>
+              </div>
 
-        {/* Milestones / Achievements Timeline */}
-        <section id="milestones" className="py-12 bg-gray-50">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Milestones</h2>
-          <div className="relative max-w-4xl mx-auto">
-            {/* Vertical line - visible only on medium and larger screens */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-brand-orange rounded-full hidden md:block"></div>
-            
-            <div className="space-y-12">
-              {/* Milestone 1 */}
-              <div className="flex flex-col md:flex-row items-center md:justify-between">
-                <div className="md:w-1/2 text-center md:text-right md:pr-12">
-                  <h3 className="text-xl font-semibold text-brand-dark">2018: Company Foundation</h3>
-                  <p className="text-gray-600">Established with a vision to redefine construction and surveying standards.</p>
+              {/* Subheading */}
+              <h2 className="text-xl md:text-2xl font-bold text-[#1C2541]">
+                Building on Trust. Measuring Excellence.
+              </h2>
+
+              {/* Description */}
+              <p className="text-brand-gray text-base md:text-lg leading-relaxed max-w-2xl">
+                MK Srinidhi Surveyors and Builders Pvt. Ltd. is a trusted name in land surveying,
+                construction, and civil engineering. We combine precision, technology, and
+                expertise to deliver accurate results and build lasting partnerships.
+              </p>
+
+              {/* Mobile Surveying Image */}
+              <div className="lg:hidden block w-full h-[250px] sm:h-[350px] rounded-lg overflow-hidden mt-6 relative shadow-md border border-gray-150">
+                <ResponsiveImage
+                  src={surveyingAboutImage}
+                  alt="Professional surveyors with total station equipment"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Floating Navy Stats Panel */}
+              <div className="bg-[#0B132B] text-white p-6 rounded-lg shadow-xl border border-gray-800 max-w-2xl mt-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:divide-x md:divide-gray-800">
+                  {/* Stat 1 */}
+                  <div className="flex items-center space-x-3.5 justify-start md:justify-center px-1">
+                    <div className="flex-shrink-0 text-brand-orange">
+                      <Briefcase className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <div className="text-xl md:text-2xl font-bold text-white leading-none">
+                        10+
+                      </div>
+                      <div className="text-[10px] md:text-[11px] text-gray-400 font-medium mt-1 leading-tight">
+                        Years of Experience
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stat 2 */}
+                  <div className="flex items-center space-x-3.5 justify-start md:justify-center px-1 pt-3 md:pt-0">
+                    <div className="flex-shrink-0 text-brand-orange">
+                      <Building2 className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <div className="text-xl md:text-2xl font-bold text-white leading-none">
+                        500+
+                      </div>
+                      <div className="text-[10px] md:text-[11px] text-gray-400 font-medium mt-1 leading-tight">
+                        Projects Completed
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stat 3 */}
+                  <div className="flex items-center space-x-3.5 justify-start md:justify-center px-1 pt-3 md:pt-0">
+                    <div className="flex-shrink-0 text-brand-orange">
+                      <Smile className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <div className="text-xl md:text-2xl font-bold text-white leading-none">
+                        200+
+                      </div>
+                      <div className="text-[10px] md:text-[11px] text-gray-400 font-medium mt-1 leading-tight">
+                        Happy Clients
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stat 4 */}
+                  <div className="flex items-center space-x-3.5 justify-start md:justify-center px-1 pt-3 md:pt-0">
+                    <div className="flex-shrink-0 text-brand-orange">
+                      <Users className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <div className="text-xl md:text-2xl font-bold text-white leading-none">
+                        50+
+                      </div>
+                      <div className="text-[10px] md:text-[11px] text-gray-400 font-medium mt-1 leading-tight">
+                        Expert Professionals
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                {/* Circle for Milestone 1 */}
-                <div className="w-4 h-4 bg-brand-orange rounded-full absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:block" style={{ top: 'calc(0% + 6px)' }}></div> {/* Adjust top based on content */}
-                <div className="md:w-1/2 text-center md:text-left md:pl-12"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Story Text */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-3xl font-bold text-brand-dark">Our Story</h2>
+                <div className="w-16 h-1 bg-brand-orange mt-2"></div>
+              </div>
+
+              <p className="text-[#555] text-sm md:text-base leading-relaxed">
+                Founded in 2018, MK Srinidhi Surveyors and Builders Pvt. Ltd. has grown from a
+                vision to be a leading name in the construction and surveying industry. Our journey
+                began with a commitment to precision, integrity, and client satisfaction.
+              </p>
+
+              {/* Mission & Vision Circle Icon blocks */}
+              <div className="space-y-6 pt-4">
+                {/* Mission */}
+                <div className="flex items-start space-x-4">
+                  <div className="bg-brand-orange/10 p-3 rounded-full flex-shrink-0 text-brand-orange">
+                    <Compass className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-brand-dark mb-1">Mission</h3>
+                    <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                      To deliver exceptional construction and surveying services, ensuring
+                      accuracy, durability, and sustainable solutions for every project.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Vision */}
+                <div className="flex items-start space-x-4">
+                  <div className="bg-brand-orange/10 p-3 rounded-full flex-shrink-0 text-brand-orange">
+                    <Eye className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-brand-dark mb-1">Vision</h3>
+                    <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                      To be the most trusted and innovative construction and surveying firm,
+                      recognized for our unwavering commitment to quality and client success.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Office Image */}
+            <div className="relative rounded-lg overflow-hidden shadow-xl border border-gray-100 h-64 sm:h-80 md:h-[400px]">
+              <ResponsiveImage
+                src={homeAboutImage}
+                alt="MK Srinidhi Surveyors and Builders Corporate Office"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Milestones Section */}
+      <section className="py-16 md:py-24 bg-gray-50 border-t border-b border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-[#0B132B]">Our Milestones</h2>
+            <div className="w-16 h-1 bg-brand-orange mx-auto mt-3"></div>
+          </div>
+
+          {/* Timeline Grid (Horizontal on Desktop, Stacked on Mobile) */}
+          <div className="relative max-w-6xl mx-auto">
+            {/* Desktop Connector Line */}
+            <div className="absolute top-[35px] left-8 right-8 h-1 bg-brand-orange/30 hidden lg:block -z-10"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Milestone 1 */}
+              <div className="bg-white lg:bg-transparent p-6 lg:p-0 rounded-lg shadow-md lg:shadow-none border lg:border-none border-gray-100 text-center space-y-4 relative">
+                <div className="bg-brand-orange/10 text-brand-orange w-16 h-16 rounded-full mx-auto flex items-center justify-center border-2 border-brand-orange shadow-md bg-white">
+                  <Building2 className="w-7 h-7" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-brand-orange">2018</div>
+                  <h3 className="font-bold text-brand-dark text-base mt-1">Company Foundation</h3>
+                  <p className="text-brand-gray text-xs md:text-sm mt-2 leading-relaxed">
+                    Established with a vision to redefine construction and surveying standards.
+                  </p>
+                </div>
               </div>
 
               {/* Milestone 2 */}
-              <div className="flex flex-col md:flex-row items-center md:justify-between">
-                <div className="md:w-1/2 text-center md:text-right md:pr-12 order-2 md:order-1"></div>
-                {/* Circle for Milestone 2 */}
-                <div className="w-4 h-4 bg-brand-orange rounded-full absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:block" style={{ top: 'calc(33% + 6px)' }}></div> {/* Adjust top based on content */}
-                <div className="md:w-1/2 text-center md:text-left md:pl-12 order-1 md:order-2">
-                  <h3 className="text-xl font-semibold text-brand-dark">2024: Achieved 100+ Projects</h3>
-                  <p className="text-gray-600">Successfully delivered over a hundred diverse projects, building a strong portfolio.</p>
+              <div className="bg-white lg:bg-transparent p-6 lg:p-0 rounded-lg shadow-md lg:shadow-none border lg:border-none border-gray-100 text-center space-y-4 relative">
+                <div className="bg-brand-orange/10 text-brand-orange w-16 h-16 rounded-full mx-auto flex items-center justify-center border-2 border-brand-orange shadow-md bg-white">
+                  <TrendingUp className="w-7 h-7" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-brand-orange">2024</div>
+                  <h3 className="font-bold text-brand-dark text-base mt-1">Achieved 100+ Projects</h3>
+                  <p className="text-brand-gray text-xs md:text-sm mt-2 leading-relaxed">
+                    Successfully delivered over a hundred diverse projects, building a strong
+                    portfolio.
+                  </p>
                 </div>
               </div>
 
               {/* Milestone 3 */}
-              <div className="flex flex-col md:flex-row items-center md:justify-between">
-                <div className="md:w-1/2 text-center md:text-right md:pr-12">
-                  <h3 className="text-xl font-semibold text-brand-dark">2025: Company Registered in MCA</h3>
-                  <p className="text-gray-600 text-sm">Company officially registered in MCA as a private limited company.</p>
+              <div className="bg-white lg:bg-transparent p-6 lg:p-0 rounded-lg shadow-md lg:shadow-none border lg:border-none border-gray-100 text-center space-y-4 relative">
+                <div className="bg-brand-orange/10 text-brand-orange w-16 h-16 rounded-full mx-auto flex items-center justify-center border-2 border-brand-orange shadow-md bg-white">
+                  <FileText className="w-7 h-7" />
                 </div>
-                {/* Circle for Milestone 3 */}
-                <div className="w-4 h-4 bg-brand-orange rounded-full absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:block" style={{ top: 'calc(66% + 6px)' }}></div> {/* Adjust top based on content */}
-                <div className="md:w-1/2 text-center md:text-left md:pl-12"></div>
+                <div>
+                  <div className="text-lg font-bold text-brand-orange">2025</div>
+                  <h3 className="font-bold text-brand-dark text-base mt-1">
+                    Company Registered in MCA
+                  </h3>
+                  <p className="text-brand-gray text-xs md:text-sm mt-2 leading-relaxed">
+                    Company officially registered in MCA as a private limited company.
+                  </p>
+                </div>
               </div>
 
               {/* Milestone 4 */}
-              <div className="flex flex-col md:flex-row items-center md:justify-between">
-                <div className="md:w-1/2 text-center md:text-right md:pr-12 order-2 md:order-1"></div>
-                {/* Circle for Milestone 4 */}
-                <div className="w-4 h-4 bg-brand-orange rounded-full absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:block" style={{ top: 'calc(100% + 6px)' }}></div> {/* Adjust top based on content */}
-                <div className="md:w-1/2 text-center md:text-left md:pl-12 order-1 md:order-2">
-                  <h3 className="text-xl font-semibold text-brand-dark">2025: Major Project Awards</h3>
-                  <p className="text-gray-600 text-sm">Recognized for excellence in several major projects, a testament to our quality and innovation.</p>
+              <div className="bg-white lg:bg-transparent p-6 lg:p-0 rounded-lg shadow-md lg:shadow-none border lg:border-none border-gray-100 text-center space-y-4 relative">
+                <div className="bg-brand-orange/10 text-brand-orange w-16 h-16 rounded-full mx-auto flex items-center justify-center border-2 border-brand-orange shadow-md bg-white">
+                  <Award className="w-7 h-7" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-brand-orange">2025</div>
+                  <h3 className="font-bold text-brand-dark text-base mt-1">Major Project Awards</h3>
+                  <p className="text-brand-gray text-xs md:text-sm mt-2 leading-relaxed">
+                    Recognized for excellence in several major projects, a testament to our quality
+                    and innovation.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Meet the Team */}
-        <section id="meet-the-team" className="py-12">
-          <h2 className="text-3xl font-bold text-center mb-12">Founders & Executives</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Team Member Card 1: Founder */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
-              <ResponsiveImage src={dassImage} alt="Karuppaiya Dass" className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
-              <h3 className="text-xl font-semibold mb-1">Karuppaiya Dass</h3>
-              <p className="text-brand-dark mb-2">Founder</p>
-              <p className="text-gray-600 text-sm">Dedicated to the company's vision and growth, Karuppaiya Dass laid the groundwork for MK Srinidhi Surveyors and Builders with a commitment to excellence.</p>
+      {/* Our People. Our Strength. Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold text-[#0B132B] mb-4">Our People. Our Strength.</h2>
+            <div className="w-16 h-1 bg-brand-orange mx-auto mb-4"></div>
+            <p className="text-brand-gray text-sm md:text-base leading-relaxed">
+              Behind every successful project is a team of skilled professionals who bring
+              knowledge, experience, and dedication to deliver outstanding results.
+            </p>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {/* Card 1 */}
+            <div className="bg-white border border-gray-150 rounded-lg p-6 text-center hover:border-brand-orange hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm flex flex-col justify-between h-full group">
+              <div className="flex flex-col items-center">
+                <div className="text-brand-orange flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="w-10 h-10" />
+                </div>
+                <h3 className="font-bold text-brand-dark text-base mb-2 group-hover:text-brand-orange transition-colors">Experienced Team</h3>
+                <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                  A team of qualified engineers, surveyors, and project experts with deep industry
+                  knowledge.
+                </p>
+              </div>
             </div>
-            {/* Team Member Card 2: CEO */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
-              <ResponsiveImage src={poogothaiImage} alt="Poogothai" className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
-              <h3 className="text-xl font-semibold mb-1">Poogothai</h3>
-              <p className="text-brand-dark mb-2">CEO</p>
-              <p className="text-gray-600 text-sm">Poogothai drives the company's strategic direction, ensuring operational efficiency and market leadership in the construction and surveying sectors.</p>
+
+            {/* Card 2 */}
+            <div className="bg-white border border-gray-150 rounded-lg p-6 text-center hover:border-brand-orange hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm flex flex-col justify-between h-full group">
+              <div className="flex flex-col items-center">
+                <div className="text-brand-orange flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Cpu className="w-10 h-10" />
+                </div>
+                <h3 className="font-bold text-brand-dark text-base mb-2 group-hover:text-brand-orange transition-colors">Continuous Learning</h3>
+                <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                  We invest in training and technology to stay ahead of industry advancements.
+                </p>
+              </div>
             </div>
-            {/* Team Member Card 3: CTO */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
-              <ResponsiveImage src={kumarImage} alt="Selva Kumar" className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
-              <h3 className="text-xl font-semibold mb-1">Selva Kumar</h3>
-              <p className="text-brand-dark mb-2">CTO</p>
-              <p className="text-gray-600 text-sm">Selva Kumar leads technological innovation, integrating advanced solutions to enhance project delivery and operational capabilities.</p>
+
+            {/* Card 3 */}
+            <div className="bg-white border border-gray-150 rounded-lg p-6 text-center hover:border-brand-orange hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm flex flex-col justify-between h-full group">
+              <div className="flex flex-col items-center">
+                <div className="text-brand-orange flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Smile className="w-10 h-10" />
+                </div>
+                <h3 className="font-bold text-brand-dark text-base mb-2 group-hover:text-brand-orange transition-colors">Collaborative Approach</h3>
+                <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                  We work closely with our clients as partners to deliver the best possible outcomes.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div className="bg-white border border-gray-150 rounded-lg p-6 text-center hover:border-brand-orange hover:shadow-xl hover:-translate-y-1 transition-all duration-300 shadow-sm flex flex-col justify-between h-full group">
+              <div className="flex flex-col items-center">
+                <div className="text-brand-orange flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <ShieldCheck className="w-10 h-10" />
+                </div>
+                <h3 className="font-bold text-brand-dark text-base mb-2 group-hover:text-brand-orange transition-colors">Integrity & Accountability</h3>
+                <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                  Every project is handled with transparency, responsibility, and a commitment to
+                  excellence.
+                </p>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Certifications & Licenses Section */}
-        <section id="certifications" className="py-12 bg-gray-50">
-          <h2 className="text-3xl font-bold text-center mb-12">Certifications & Licenses</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto items-center justify-center">
-            {/* Certification 1 */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
-              <Award size={64} className="text-brand-orange mb-4" /> {/* Replaced image with icon */}
-              <h3 className="text-lg font-semibold">ISO 9001:2015 Certified</h3>
-              <p className="text-gray-600 text-sm">Quality Management System</p>
+      {/* Certifications & Licenses Section */}
+      <section className="py-16 md:py-20 bg-gray-50 border-t border-b border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-[#0B132B]">Certifications & Licenses</h2>
+            <div className="w-16 h-1 bg-brand-orange mx-auto mt-3"></div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Cert 1 */}
+            <div className="flex items-center space-x-4 p-5 bg-white rounded-lg border border-gray-150 shadow-sm">
+              <div className="text-brand-orange flex-shrink-0 bg-brand-orange/10 p-3 rounded-lg">
+                <Award className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base">
+                  ISO 9001:2015 Certified
+                </h3>
+                <p className="text-brand-gray text-xs md:text-sm">Quality Management System</p>
+              </div>
             </div>
-            {/* Certification 2 */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
-              <FileText size={64} className="text-brand-orange mb-4" /> {/* Replaced image with icon */}
-              <h3 className="text-lg font-semibold">Government Approved Contractor</h3>
-              <p className="text-gray-600 text-sm">Licensed for Public & Private Projects</p>
+
+            {/* Cert 2 */}
+            <div className="flex items-center space-x-4 p-5 bg-white rounded-lg border border-gray-150 shadow-sm">
+              <div className="text-brand-orange flex-shrink-0 bg-brand-orange/10 p-3 rounded-lg">
+                <FileText className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base">
+                  Government Approved Contractor
+                </h3>
+                <p className="text-brand-gray text-xs md:text-sm">
+                  Licensed for Public & Private Projects
+                </p>
+              </div>
             </div>
-            {/* Certification 3 */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg shadow-md">
-              <Users size={64} className="text-brand-orange mb-4" /> {/* Replaced image with icon */}
-              <h3 className="text-lg font-semibold">Industry Association Member</h3>
-              <p className="text-gray-600 text-sm">Committed to Industry Best Practices</p>
+
+            {/* Cert 3 */}
+            <div className="flex items-center space-x-4 p-5 bg-white rounded-lg border border-gray-150 shadow-sm">
+              <div className="text-brand-orange flex-shrink-0 bg-brand-orange/10 p-3 rounded-lg">
+                <UserCheck className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base">
+                  Industry Association Member
+                </h3>
+                <p className="text-brand-gray text-xs md:text-sm">
+                  Committed to Industry Best Practices
+                </p>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Why Choose Us (Reinforced) */}
-        <section id="why-choose-us-about" className="py-12">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose Us</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto text-center">
-            <div className="flex flex-col items-center p-4">
-              <Calendar size={64} className="text-brand-orange mb-4" /> {/* Replaced image with icon */}
-              <h3 className="text-xl font-semibold mb-2">10+ Years of Experience</h3>
-              <p className="text-gray-600">A decade of proven expertise in diverse construction and surveying projects.</p>
+      {/* Why Choose Us Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-[#0B132B]">Why Choose Us</h2>
+            <div className="w-16 h-1 bg-brand-orange mx-auto mt-3"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto lg:divide-x lg:divide-gray-100">
+            {/* Prop 1 */}
+            <div className="text-center md:text-left px-4 space-y-3">
+              <div className="text-brand-orange flex justify-center md:justify-start">
+                <Calendar className="w-10 h-10" />
+              </div>
+              <h3 className="font-bold text-brand-dark text-base">10+ Years of Experience</h3>
+              <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                A decade of proven expertise in diverse construction and surveying projects.
+              </p>
             </div>
-            <div className="flex flex-col items-center p-4">
-              <CheckCircle size={64} className="text-brand-orange mb-4" /> {/* Replaced image with icon */}
-              <h3 className="text-xl font-semibold mb-2">Verified Government Contracts</h3>
-              <p className="text-gray-600">Trusted by government bodies for reliable and high-quality project delivery.</p>
+
+            {/* Prop 2 */}
+            <div className="text-center md:text-left px-4 space-y-3">
+              <div className="text-brand-orange flex justify-center md:justify-start">
+                <CheckCircle className="w-10 h-10" />
+              </div>
+              <h3 className="font-bold text-brand-dark text-base">Verified Government Contracts</h3>
+              <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                Trusted by government bodies for reliable and high-quality project delivery.
+              </p>
             </div>
-            <div className="flex flex-col items-center p-4">
-              <span className="text-brand-orange mb-4 text-6xl font-bold">₹</span> {/* Replaced icon with Indian Rupee symbol */}
-              <h3 className="text-xl font-semibold mb-2">Transparent Billing & Estimates</h3>
-              <p className="text-gray-600">Clear, honest, and detailed financial dealings with no hidden costs.</p>
+
+            {/* Prop 3 */}
+            <div className="text-center md:text-left px-4 space-y-3">
+              <div className="text-brand-orange flex justify-center md:justify-start">
+                <span className="text-brand-orange text-4xl font-extrabold block h-10 leading-none">
+                  ₹
+                </span>
+              </div>
+              <h3 className="font-bold text-brand-dark text-base">Transparent Billing & Estimates</h3>
+              <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                Clear, honest, and detailed financial dealings with no hidden costs.
+              </p>
             </div>
-            <div className="flex flex-col items-center p-4">
-              <UserCheck size={64} className="text-brand-orange mb-4" /> {/* Replaced image with icon */}
-              <h3 className="text-xl font-semibold mb-2">Trained & Certified Professionals</h3>
-              <p className="text-gray-600">Our team comprises highly skilled and officially certified engineers and surveyors.</p>
+
+            {/* Prop 4 */}
+            <div className="text-center md:text-left px-4 space-y-3">
+              <div className="text-brand-orange flex justify-center md:justify-start">
+                <UserCheck className="w-10 h-10" />
+              </div>
+              <h3 className="font-bold text-brand-dark text-base">Trained & Certified Professionals</h3>
+              <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
+                Our team comprises highly skilled and officially certified engineers and surveyors.
+              </p>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      <CTABanner
-        title="Looking for a reliable construction partner?"
-        buttonText="Contact Us Today"
-        buttonLink="/contact"
-      />
+      {/* Final CTABanner Area */}
+      <CTABanner />
     </Layout>
   );
 };
