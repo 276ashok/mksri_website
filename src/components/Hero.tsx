@@ -1,13 +1,15 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import constructionBackgroundImage from "@/assets/images/construction_background.png";
 import ResponsiveImage from "@/components/ResponsiveImage";
 
 const Hero = () => {
   return (
-    <section id="home" className="relative flex items-center pt-16 min-h-screen overflow-hidden">
+    <section
+      id="home"
+      className="relative flex items-center pt-24 min-h-[90vh] md:min-h-screen overflow-hidden mt-[48px] md:mt-0"
+    >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <ResponsiveImage
@@ -15,53 +17,67 @@ const Hero = () => {
           alt="Construction Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 hero-gradient"></div> {/* Apply the gradient overlay */}
+        {/* Deep dark gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 items-center text-center lg:text-left"> {/* Centered text for smaller screens */}
-          <div className="space-y-6 max-w-3xl mx-auto lg:mx-0"> {/* Centered content for smaller screens */}
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white text-shadow"
-              initial={{ opacity: 0, y: -20 }}
+      <div className="container mx-auto px-4 relative z-10 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8 items-center text-left">
+          <div className="space-y-6 max-w-3xl">
+            {/* Orange eyebrow text */}
+            <motion.span
+              className="text-xs md:text-sm font-bold tracking-wider text-brand-orange uppercase block"
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              Building Dreams with Precision and Trust
+              PRECISION. EXPERIENCE. TRUST.
+            </motion.span>
+
+            {/* Large bold heading */}
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white text-shadow"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Surveying Today, <br className="hidden md:inline" />
+              Building Tomorrow.
             </motion.h1>
-            
-            <motion.p 
-              className="text-lg md:text-xl max-w-lg mx-auto lg:mx-0 text-white text-shadow"
+
+            {/* Supporting description */}
+            <motion.p
+              className="text-base md:text-lg lg:text-xl max-w-2xl text-gray-300 leading-relaxed text-shadow"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Experts in Residential, Commercial & Land Surveying Projects
+              Delivering accurate surveying, engineering & construction solutions with advanced
+              technology and unmatched expertise.
             </motion.p>
-            
+
+            {/* Call to Actions */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col sm:flex-row justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4"
             >
-              <Link to="/contact" className="btn-primary">
-                Get a Quote
+              <Link
+                to="/services"
+                className="bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-center py-3.5 px-8 rounded-md shadow-md hover:shadow-lg active:scale-95 transition-all duration-200 text-sm tracking-wide"
+              >
+                OUR SERVICES
               </Link>
-              <Link to="/projects" className="btn-secondary">
-                View Our Projects
+              <Link
+                to="/contact"
+                className="border-2 border-white hover:bg-white hover:text-brand-dark text-white font-bold text-center py-3 px-8 rounded-md transition-all duration-200 text-sm tracking-wide"
+              >
+                REQUEST A SURVEY
               </Link>
             </motion.div>
           </div>
-          {/* Removed the statistics block as per new requirements */}
         </div>
-      </div>
-      
-      {/* Wave Divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-        <svg className="relative block w-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V56.44Z" className="fill-white"></path>
-        </svg>
       </div>
     </section>
   );

@@ -1,112 +1,85 @@
-import React from 'react';
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Star } from 'lucide-react';
-import featuredTestimonialImage from '@/assets/images/featured_testimonial.png';
-import ResponsiveImage from '@/components/ResponsiveImage';
+
+const testimonialData = [
+  {
+    quote:
+      "MK Srinidhi Surveyors & Builders Pvt. Ltd. delivered accurate survey data and excellent support throughout our project. Their professionalism and timely delivery made a huge difference.",
+    author: "Project Manager, IT Park Development",
+  },
+  {
+    quote:
+      "The land surveying work was performed with outstanding speed and absolute precision. The digital models provided were flawless, making engineering coordination seamless.",
+    author: "Chief Engineer, Road & Bridge Project",
+  },
+  {
+    quote:
+      "Highly professional team. They handled our complex topographic mapping requirements with ease and kept us updated at every stage of the process.",
+    author: "Director, Premium Apartment Project",
+  },
+];
 
 const Testimonials = () => {
-  // Sample testimonial data
-  const testimonials = [
-    {
-      rating: 5,
-      clientName: "Mr. Pradeep",
-      location: "Chennai",
-      projectType: "Residential Construction",
-      testimonial: "MK Srinidhi Surveyors and Builders completed our home project on time with amazing attention to detail. Highly recommended!",
-    },     
-    {
-      rating: 4,
-      clientName: "Mrs. Meena",
-      location: "Coimbatore",
-      projectType: "Villa Construction",
-      testimonial: "Excellent service and professional team. Very happy with the quality of construction.",
-    },
-    {
-      rating: 5,
-      clientName: "Mr. Suresh",
-      location: "Bangalore",
-      projectType: "Residential Survey",
-      testimonial: "The land surveying service was very accurate and helped us avoid potential issues.",
-    },
-  ];
+  const [activeSlide, setActiveSlide] = useState(0);
 
   return (
-    <section id="testimonials" className="py-16 bg-gray-50">
+    <section id="testimonials" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-bold text-brand-dark mb-4">What Our Clients Say</h2>
-          <p className="text-lg text-brand-gray max-w-3xl mx-auto">Real words from satisfied clients across our residential, commercial, and surveying projects.</p>
-        </motion.div>
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="text-xs md:text-sm font-bold tracking-wider text-brand-orange uppercase block mb-2">
+            WHAT OUR CLIENTS SAY
+          </span>
+          <div className="w-16 h-1 bg-brand-orange mx-auto"></div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-lg shadow-md p-6"
+        {/* Testimonial Display Area */}
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-12 px-6">
+          {/* Giant Quote Icon */}
+          <div className="flex-shrink-0 text-gray-100 select-none">
+            <svg
+              className="w-20 h-20 md:w-32 md:h-32 fill-current"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              {/* Star Rating */}
-              <div className="flex items-center mb-2">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-500" />
-                ))}
-              </div>
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+          </div>
 
-              <h3 className="text-xl font-semibold text-brand-dark mb-2">{testimonial.clientName}</h3>
-              <p className="text-brand-gray text-sm mb-2">{testimonial.location} ({testimonial.projectType})</p>
-              <p className="text-brand-gray">{testimonial.testimonial}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Featured Testimonial Section */}
-        <div className="mt-16 bg-brand-orange/10 rounded-lg p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-semibold text-brand-dark mb-4">Featured Testimonial</h3>
-              <p className="text-brand-gray text-lg mb-4">
-                "MK Srinidhi Surveyors and Builders" attention to detail and commitment to quality in land surveying is unparalleled. Their survey report was accurate, timely, and exceeded our expectations. We highly recommend them for any surveying needs."
+          {/* Testimonial Quote & Attribution */}
+          <div className="flex-grow pt-4">
+            <motion.div
+              key={activeSlide}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
+            >
+              <p className="text-[#333] text-lg md:text-2xl font-medium leading-relaxed italic">
+                "{testimonialData[activeSlide].quote}"
               </p>
-              <div className="flex items-center">
-                <div>
-                  <p className="font-semibold text-brand-dark">Mr. Rajesh Kumar</p>
-                  <p className="text-brand-gray text-sm">Bangalore (Land Survey)</p>
-                </div>
+              <div className="text-brand-gray font-bold text-sm md:text-base tracking-wide uppercase">
+                — {testimonialData[activeSlide].author}
               </div>
-            </div>
-            <div>
-              <ResponsiveImage src={featuredTestimonialImage} alt="Project" className="rounded-lg" />
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Stats or Trust Indicators */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          <div>
-            <div className="text-4xl font-bold text-brand-orange">150+</div>
-            <p className="text-brand-gray">Projects Completed</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-brand-orange">100+</div>
-            <p className="text-brand-gray">Happy Clients</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-brand-orange">10+</div>
-            <p className="text-brand-gray">Across Cities</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-brand-orange">10+</div>
-            <p className="text-brand-gray">Years of Experience</p>
-          </div>
+        {/* Carousel Indicators (3 dots) */}
+        <div className="flex justify-center items-center space-x-2.5 mt-12">
+          {testimonialData.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveSlide(index)}
+              className={`w-3.5 h-3.5 rounded-full transition-all duration-300 ${
+                activeSlide === index ? "bg-brand-orange w-8" : "bg-gray-250 hover:bg-gray-400"
+              }`}
+              style={{
+                backgroundColor: activeSlide === index ? undefined : "#E5E7EB",
+              }}
+              aria-label={`Go to slide ${index + 1}`}
+            ></button>
+          ))}
         </div>
       </div>
     </section>

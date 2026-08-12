@@ -1,96 +1,86 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, Clock, DollarSign, Award } from "lucide-react"; // Example icons
-import { Link } from "react-router-dom";
+import { Target, Cpu, Award, ShieldAlert, Clock, UserCheck } from "lucide-react";
 
-const features = [
+const propositions = [
   {
-    icon: <CheckCircle size={32} />,
-    title: "Certified Engineers",
-    description: "Our team comprises highly qualified and certified engineers ensuring top-notch quality.",
+    id: 1,
+    title: "Accuracy",
+    description: "High precision in every survey.",
+    icon: <Target className="w-6 h-6 text-white" />,
   },
   {
-    icon: <Clock size={32} />,
-    title: "On-Time Delivery",
-    description: "We are committed to completing projects within agreed timelines, without compromising quality.",
+    id: 2,
+    title: "Advanced Technology",
+    description: "Modern instruments & software.",
+    icon: <Cpu className="w-6 h-6 text-white" />,
   },
   {
-    icon: <span className="text-3xl font-bold">₹</span>, // Replaced icon with Indian Rupee symbol
-    title: "Transparent Pricing",
-    description: "Clear and honest pricing with no hidden costs, ensuring trust and satisfaction.",
+    id: 3,
+    title: "Experienced Team",
+    description: "Skilled professionals you can trust.",
+    icon: <Award className="w-6 h-6 text-white" />,
   },
   {
-    icon: <Award size={32} />,
-    title: "150+ Projects Completed", // Updated to match Hero's 150+
-    description: "A proven track record of successfully delivering over 150 diverse projects.",
+    id: 4,
+    title: "Safety First",
+    description: "Committed to health, safety & quality.",
+    icon: <ShieldAlert className="w-6 h-6 text-white" />,
+  },
+  {
+    id: 5,
+    title: "Timely Delivery",
+    description: "On-time results every time.",
+    icon: <Clock className="w-6 h-6 text-white" />,
+  },
+  {
+    id: 6,
+    title: "Client Focused",
+    description: "Solutions tailored to your needs.",
+    icon: <UserCheck className="w-6 h-6 text-white" />,
   },
 ];
 
 const WhyChooseUs = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   return (
-    <section id="why-choose-us" className="section-padding bg-brand-gray-light">
+    <section id="why-choose-us" className="py-16 md:py-24 bg-white border-t border-gray-100">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="section-title text-center mb-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={itemVariants}
-        >
-          Why Choose Us
-        </motion.h2>
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="text-xs md:text-sm font-bold tracking-wider text-brand-orange uppercase block mb-2">
+            WHY CHOOSE US
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
+            We deliver precision, reliability and value in every project.
+          </h2>
+          <div className="w-16 h-1 bg-brand-orange mx-auto"></div>
+        </div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-        >
-          {features.map((feature, index) => (
+        {/* Propositions Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {propositions.map((prop, idx) => (
             <motion.div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow-lg text-center card-hover"
-              variants={itemVariants}
+              key={prop.id}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              viewport={{ once: true }}
+              className="flex items-start space-x-4 p-5 rounded-lg hover:bg-gray-50 transition-colors duration-300"
             >
-              <div className="flex justify-center mb-4 text-brand-orange">
-                {feature.icon}
+              {/* Circular Icon (Dark Navy Background) */}
+              <div className="flex-shrink-0 bg-[#0B132B] p-3 rounded-full flex items-center justify-center shadow-md">
+                {prop.icon}
               </div>
-              <h3 className="text-xl font-semibold text-brand-dark mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-brand-gray">{feature.description}</p>
+              {/* Text */}
+              <div>
+                <h3 className="text-lg font-bold text-[#1C2541] mb-1.5">{prop.title}</h3>
+                <p className="text-brand-gray text-sm md:text-base leading-relaxed">
+                  {prop.description}
+                </p>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Removed "See Certifications" link as per user request */}
-        {/* <motion.div
-          className="text-center mt-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={itemVariants}
-        >
-          <Link to="/about#certifications" className="btn-secondary">
-            See Certifications
-          </Link>
-        </motion.div> */}
+        </div>
       </div>
     </section>
   );
