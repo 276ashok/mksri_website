@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Site Engineer",
+        "location": "Bangalore",
+        "jobType": "Full-time",
+        "description": "Responsible for overseeing construction projects and ensuring quality standards are met.",
+        "link": "/careers/site-engineer"
+    },
+    {
+        "title": "Surveyor",
+        "location": "Chennai",
+        "jobType": "Full-time",
+        "description": "Conducting land surveys and preparing reports for construction projects.",
+        "link": "/careers/surveyor"
+    },
+    {
+        "title": "Project Manager",
+        "location": "Coimbatore",
+        "jobType": "Full-time",
+        "description": "Managing construction projects from start to finish, ensuring timely completion and within budget.",
+        "link": "/careers/project-manager"
+    }
+]
