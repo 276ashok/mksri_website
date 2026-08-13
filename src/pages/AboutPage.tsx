@@ -4,14 +4,6 @@ import PageSEO from "@/components/PageSEO";
 import CTABanner from "@/components/CTABanner";
 import { Link } from "react-router-dom";
 import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
-import {
   Briefcase,
   Building2,
   Smile,
@@ -31,8 +23,7 @@ import {
   Award,
 } from "lucide-react";
 import homeAboutImage from "@/assets/images/home_about.png";
-import precision1Image from "@/assets/images/precision1.png";
-import surveyingAboutImage from "@/assets/images/surveying_about_image.png";
+import aboutHeroImage from "@/assets/images/about_hero.png";
 import ResponsiveImage from "@/components/ResponsiveImage";
 
 const AboutPage = () => {
@@ -46,38 +37,34 @@ const AboutPage = () => {
 
       {/* Hero Section & Breadcrumbs */}
       <section className="relative bg-[#F4F6F9] pt-12 pb-12 lg:py-0 min-h-fit lg:min-h-[580px] flex items-center overflow-hidden mt-[48px] md:mt-0">
-        {/* Right side absolute image container (Desktop only) with clip-path diagonal shape */}
-        <div 
-          className="absolute right-0 top-0 bottom-0 h-full w-[52%] hidden lg:block overflow-hidden"
-          style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)' }}
+        {/* Layered Arrow Cut Accent Borders (Desktop only) */}
+        {/* 1. Orange Accent Layer */}
+        <div
+          className="absolute right-0 top-0 bottom-0 h-full w-[52.8%] hidden lg:block bg-brand-orange z-0"
+          style={{ clipPath: "polygon(14% 0, 100% 0, 100% 100%, 14% 100%, 0% 50%)" }}
+        />
+        {/* 2. Navy Accent Layer */}
+        <div
+          className="absolute right-0 top-0 bottom-0 h-full w-[52.4%] hidden lg:block bg-[#0B132B] z-0"
+          style={{ clipPath: "polygon(14.5% 0, 100% 0, 100% 100%, 14.5% 100%, 0% 50%)" }}
+        />
+        {/* 3. Main Image Layer */}
+        <div
+          className="absolute right-0 top-0 bottom-0 h-full w-[52%] hidden lg:block overflow-hidden z-10"
+          style={{ clipPath: "polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0% 50%)" }}
         >
           <ResponsiveImage
-            src={surveyingAboutImage}
-            alt="Professional surveyors with total station equipment"
+            src={aboutHeroImage}
+            alt="MK Srinidhi civil engineers and surveyors team"
             className="w-full h-full object-cover"
           />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 w-full">
+        <div className="container mx-auto px-4 relative z-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Hero Column */}
-            <div className="lg:col-span-7 space-y-6 py-6 lg:py-12">
-              {/* Breadcrumb */}
-              <Breadcrumb className="mb-2">
-                <BreadcrumbList>
-                  <BreadcrumbItem>
-                    <BreadcrumbLink asChild>
-                      <Link to="/" className="text-gray-500 hover:text-brand-orange">
-                        Home
-                      </Link>
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage className="text-[#0B132B] font-semibold">About Us</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+            <div className="lg:col-span-6 space-y-6 py-6 lg:py-12">
+
 
               {/* Title */}
               <div>
@@ -93,7 +80,7 @@ const AboutPage = () => {
               </h2>
 
               {/* Description */}
-              <p className="text-brand-gray text-base md:text-lg leading-relaxed max-w-2xl">
+              <p className="text-brand-gray text-base md:text-lg leading-relaxed max-w-lg">
                 MK Srinidhi Surveyors and Builders Pvt. Ltd. is a trusted name in land surveying,
                 construction, and civil engineering. We combine precision, technology, and
                 expertise to deliver accurate results and build lasting partnerships.
@@ -102,14 +89,14 @@ const AboutPage = () => {
               {/* Mobile Surveying Image */}
               <div className="lg:hidden block w-full h-[250px] sm:h-[350px] rounded-lg overflow-hidden mt-6 relative shadow-md border border-gray-150">
                 <ResponsiveImage
-                  src={surveyingAboutImage}
-                  alt="Professional surveyors with total station equipment"
+                  src={aboutHeroImage}
+                  alt="MK Srinidhi civil engineers and surveyors team"
                   className="w-full h-full object-cover"
                 />
               </div>
 
               {/* Floating Navy Stats Panel */}
-              <div className="bg-[#0B132B] text-white p-6 rounded-lg shadow-xl border border-gray-800 max-w-2xl mt-8">
+              <div className="bg-[#0B132B] text-white p-5 rounded-lg shadow-xl border border-gray-800 max-w-xl mt-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:divide-x md:divide-gray-800">
                   {/* Stat 1 */}
                   <div className="flex items-center space-x-3.5 justify-start md:justify-center px-1">

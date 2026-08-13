@@ -14,6 +14,8 @@ import {
   Youtube,
 } from "lucide-react";
 
+import { servicesData } from "@/data/servicesData";
+
 // Navigation links
 const navLinks = [
   { name: "Home", href: "/" },
@@ -21,16 +23,7 @@ const navLinks = [
   {
     name: "Services",
     href: "/services",
-    dropdown: [
-      { name: "Land Surveying", href: "/services/land-surveying" },
-      { name: "Topographical Survey", href: "/services/land-surveying" },
-      { name: "Construction Surveying", href: "/services/land-surveying" },
-      { name: "Measured Building Survey", href: "/services/land-surveying" },
-      { name: "Setting Out", href: "/services/land-surveying" },
-      { name: "Civil Engineering", href: "/services/architectural-planning" },
-      { name: "Site Engineering", href: "/services/construction-estimation-consulting" },
-      { name: "GIS & Geospatial", href: "/services/land-surveying" },
-    ],
+    dropdown: servicesData.map((s) => ({ name: s.title, href: `/services/${s.slug}` })),
   },
   { name: "Projects", href: "/projects" },
   { name: "Technology", href: "/#technology" },

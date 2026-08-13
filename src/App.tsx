@@ -14,14 +14,9 @@ const CareersPage = lazy(() => import("./pages/CareersPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
-const CommercialConstructionPage = lazy(() => import("./pages/CommercialConstructionPage"));
-const LandSurveyingPage = lazy(() => import("./pages/LandSurveyingPage"));
-const ArchitecturalPlanningPage = lazy(() => import("./pages/ArchitecturalPlanningPage"));
-const RenovationRemodelingPage = lazy(() => import("./pages/RenovationRemodelingPage"));
-const ConstructionEstimationConsultingPage = lazy(() => import("./pages/ConstructionEstimationConsultingPage"));
-const ResidentialConstructionPage = lazy(() => import("./pages/ResidentialConstructionPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const ProjectDetailPage = lazy(() => import("./pages/ProjectDetailPage"));
+const ServiceDetailPage = lazy(() => import("./pages/ServiceDetailPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsConditionsPage = lazy(() => import("./pages/TermsConditionsPage"));
@@ -72,12 +67,7 @@ const App = () => {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="/services/residential-construction" element={<ResidentialConstructionPage />} />
-            <Route path="/services/commercial-construction" element={<CommercialConstructionPage />} />
-            <Route path="/services/land-surveying" element={<LandSurveyingPage />} />
-            <Route path="/services/architectural-planning" element={<ArchitecturalPlanningPage />} />
-            <Route path="/services/renovation-remodeling" element={<RenovationRemodelingPage />} />
-            <Route path="/services/construction-estimation-consulting" element={<ConstructionEstimationConsultingPage />} />
+            <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
             
             {/* Protected Admin Route */}

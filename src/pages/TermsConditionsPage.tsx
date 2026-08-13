@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '@/components/Layout';
 import PageSEO from '@/components/PageSEO';
-import Breadcrumb from '@/components/Breadcrumb';
 
 const TermsConditionsPage = () => {
   return (
@@ -13,13 +12,7 @@ const TermsConditionsPage = () => {
       />
       <div className="pt-20">
         <div className="container mx-auto px-4 py-8">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', link: '/' },
-              { label: 'Terms & Conditions' }
-            ]} 
-          />
-          <h1 className="text-4xl font-bold mb-6 text-brand-blue mt-4">Terms & Conditions</h1>
+          <h1 className="text-4xl font-bold mb-6 text-brand-blue mt-4 font-sans">Terms & Conditions</h1>
           <div className="prose max-w-none">
             <p><strong>Last updated: June 3, 2025</strong></p>
 

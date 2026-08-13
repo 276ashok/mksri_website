@@ -1,70 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import homeModernImage from "@/assets/images/home_modern.jpg";
-import homeModern1Image from "@/assets/images/home_modern1.jpg";
-import homeModern2Image from "@/assets/images/home_modern2.jpg";
-import homeModern3Image from "@/assets/images/home_modern3.jpg";
-import homeDowntownImage from "@/assets/images/home_downtown.png";
-import downtown1Image from "@/assets/images/downtown1.png";
-import downtown2Image from "@/assets/images/downtown2.png";
-import downtown3Image from "@/assets/images/downtown3.png";
-import homeIndustrialImage from "@/assets/images/home_industrial.png";
-import industrial1Image from "@/assets/images/industrial1.png";
-import industrial2Image from "@/assets/images/industrial2.png";
-import industrial3Image from "@/assets/images/industrial3.png";
-import precision1Image from "@/assets/images/precision1.png";
-import precision2Image from "@/assets/images/precision2.png";
-import precision3Image from "@/assets/images/precision3.png";
 import ResponsiveImage from "@/components/ResponsiveImage";
+import { projectsData as projects } from "@/data/projectsData";
 
-// The full projects array matching both homepage reference and internal data structure
-export const projects = [
-  {
-    id: 1,
-    title: "Premium Apartment Project",
-    category: "Residential",
-    location: "Chennai, Tamil Nadu",
-    image: homeModernImage,
-    slug: "premium-apartment-project",
-    status: "Completed",
-    description: "A premium 12-unit residential complex featuring contemporary architecture and energy-efficient design.",
-    galleryImages: [homeModern1Image, homeModern2Image, homeModern3Image],
-  },
-  {
-    id: 2,
-    title: "IT Park Development",
-    category: "Commercial",
-    location: "Chennai, Tamil Nadu",
-    image: homeDowntownImage,
-    slug: "it-park-development",
-    status: "Completed",
-    description: "A state-of-the-art commercial IT park with flexible office spaces and intelligent infrastructure.",
-    galleryImages: [downtown1Image, downtown2Image, downtown3Image],
-  },
-  {
-    id: 3,
-    title: "Road & Bridge Project",
-    category: "Infrastructure",
-    location: "Chennai, Tamil Nadu",
-    image: precision1Image,
-    slug: "road-bridge-project",
-    status: "Completed",
-    description: "Detailed construction and alignment surveys for major highway and bridge projects.",
-    galleryImages: [precision2Image, precision3Image],
-  },
-  {
-    id: 4,
-    title: "Factory & Warehouse",
-    category: "Industrial",
-    location: "Chennai, Tamil Nadu",
-    image: homeIndustrialImage,
-    slug: "factory-warehouse-project",
-    status: "Completed",
-    description: "Industrial warehouse and manufacturing facility development with exact structural alignment.",
-    galleryImages: [industrial1Image, industrial2Image, industrial3Image],
-  },
-];
+export { projects };
 
 interface ProjectsProps {
   limit?: number;
@@ -77,23 +17,10 @@ const Projects: React.FC<ProjectsProps> = ({ limit = 4, fullPage = false, projec
   const displayedProjects = fullPage ? sourceProjects : sourceProjects.slice(0, limit);
 
   return (
-    <section id="projects" className="py-16 md:py-24 bg-gray-50 border-t border-b border-gray-100">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        {!fullPage && (
-          <div className="text-center mb-16">
-            <span className="text-xs md:text-sm font-bold tracking-wider text-brand-orange uppercase block mb-2">
-              OUR PROJECTS
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4">
-              Explore some of our successfully completed projects.
-            </h2>
-            <div className="w-16 h-1 bg-brand-orange mx-auto"></div>
-          </div>
-        )}
-
+    <section id="projects" className="py-8 bg-transparent">
+      <div className="container mx-auto px-0">
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {displayedProjects.map((project, idx) => (
             <motion.div
               key={project.id}
@@ -101,13 +28,13 @@ const Projects: React.FC<ProjectsProps> = ({ limit = 4, fullPage = false, projec
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
               viewport={{ once: true }}
-              className="bg-white rounded-lg shadow-md overflow-hidden card-hover group"
+              className="bg-white rounded-lg border border-gray-150 shadow-md overflow-hidden card-hover group flex flex-col justify-between h-full"
             >
-              <Link to={`/projects/${project.slug}`} className="block">
+              <div className="flex flex-col flex-grow">
                 {/* Image Section */}
                 <div className="relative h-48 overflow-hidden bg-gray-100">
                   <ResponsiveImage
-                    src={project.image}
+                    src={project.heroImage}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -118,30 +45,29 @@ const Projects: React.FC<ProjectsProps> = ({ limit = 4, fullPage = false, projec
                 </div>
 
                 {/* Info Section */}
-                <div className="p-5">
+                <div className="p-5 flex-grow">
                   <h3 className="font-bold text-brand-dark text-base mb-1.5 group-hover:text-brand-orange transition-colors duration-200 leading-snug">
                     {project.title}
                   </h3>
-                  <p className="text-brand-gray text-xs md:text-sm font-medium">
-                    {project.location}
+                  <p className="text-brand-gray text-xs md:text-sm leading-relaxed mb-3 line-clamp-3">
+                    {project.tagline}
                   </p>
                 </div>
-              </Link>
+              </div>
+
+              {/* View Project Action footer */}
+              <div className="p-5 pt-0">
+                <Link
+                  to={`/projects/${project.slug}`}
+                  className="text-brand-orange group-hover:text-brand-orange/95 font-bold text-xs md:text-sm tracking-wide inline-flex items-center space-x-1 hover:translate-x-1 transition-transform duration-200"
+                >
+                  <span>View Project</span>
+                  <span>&rarr;</span>
+                </Link>
+              </div>
             </motion.div>
           ))}
         </div>
-
-        {/* View All Projects Button (Outlined Navy Style) */}
-        {!fullPage && (
-          <div className="text-center">
-            <Link
-              to="/projects"
-              className="inline-block border-2 border-[#0B132B] hover:bg-[#0B132B] hover:text-white text-[#0B132B] font-bold text-sm py-3 px-8 rounded transition-all duration-200"
-            >
-              VIEW ALL PROJECTS
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );

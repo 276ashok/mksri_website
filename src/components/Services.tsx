@@ -12,72 +12,38 @@ import {
   Milestone,
 } from "lucide-react";
 
-// The 8 services matching the reference exactly
-const services = [
-  {
-    id: 1,
-    title: "Land Surveying",
-    description: "Accurate boundary & land surveying with advanced instruments.",
-    icon: <Compass className="w-10 h-10" />,
-    link: "/services/land-surveying",
-  },
-  {
-    id: 2,
-    title: "Topographical Survey",
-    description: "Detailed topographic mapping for planning and design.",
-    icon: <Map className="w-10 h-10" />,
-    link: "/services/land-surveying",
-  },
-  {
-    id: 3,
-    title: "Construction Surveying",
-    description: "Setting out, as-built surveys & construction monitoring.",
-    icon: <Building2 className="w-10 h-10" />,
-    link: "/services/land-surveying",
-  },
-  {
-    id: 4,
-    title: "Measured Building Survey",
-    description: "Accurate measurements & documentation of existing structures.",
-    icon: <Ruler className="w-10 h-10" />,
-    link: "/services/land-surveying",
-  },
-  {
-    id: 5,
-    title: "Setting Out",
-    description: "Precise setting out for structures, roads & utilities.",
-    icon: <Target className="w-10 h-10" />,
-    link: "/services/land-surveying",
-  },
-  {
-    id: 6,
-    title: "Civil Engineering",
-    description: "Planning, design & engineering solutions for infrastructure.",
-    icon: <Milestone className="w-10 h-10" />,
-    link: "/services/architectural-planning",
-  },
-  {
-    id: 7,
-    title: "Site Engineering",
-    description: "On-site engineering support for smooth project execution.",
-    icon: <HardHat className="w-10 h-10" />,
-    link: "/services/construction-estimation-consulting",
-  },
-  {
-    id: 8,
-    title: "GIS & Geospatial",
-    description: "GIS mapping, spatial analysis & geospatial data solutions.",
-    icon: <Globe className="w-10 h-10" />,
-    link: "/services/land-surveying",
-  },
-];
+import { servicesData } from "@/data/servicesData";
+
+const getServiceIcon = (slug: string) => {
+  switch (slug) {
+    case "land-surveying-plot-marking":
+      return <Compass className="w-10 h-10" />;
+    case "topographical-survey":
+      return <Map className="w-10 h-10" />;
+    case "construction-surveying":
+      return <Building2 className="w-10 h-10" />;
+    case "measured-building-survey":
+      return <Ruler className="w-10 h-10" />;
+    case "setting-out":
+      return <Target className="w-10 h-10" />;
+    case "civil-engineering":
+      return <Milestone className="w-10 h-10" />;
+    case "site-engineering":
+      return <HardHat className="w-10 h-10" />;
+    case "gis-geospatial":
+      return <Globe className="w-10 h-10" />;
+    default:
+      return <Compass className="w-10 h-10" />;
+  }
+};
 
 interface ServicesProps {
   limit?: number;
+  fullPage?: boolean;
 }
 
-const Services: React.FC<ServicesProps> = ({ limit = 8 }) => {
-  const displayedServices = services.slice(0, limit);
+const Services: React.FC<ServicesProps> = ({ limit = 8, fullPage = false }) => {
+  const displayedServices = fullPage ? servicesData : servicesData.slice(0, limit);
 
   return (
     <section id="services" className="py-16 md:py-24 bg-gray-50">
@@ -104,10 +70,10 @@ const Services: React.FC<ServicesProps> = ({ limit = 8 }) => {
               viewport={{ once: true }}
               className="bg-white border border-gray-150 rounded-lg p-6 text-center hover:border-brand-orange hover:shadow-xl transition-all duration-300 group flex flex-col justify-between h-full"
             >
-              <Link to={service.link} className="flex flex-col items-center flex-grow">
+              <Link to={`/services/${service.slug}`} className="flex flex-col items-center flex-grow">
                 {/* Icon wrapper */}
                 <div className="text-brand-orange bg-brand-orange/10 p-4 rounded-full mb-5 group-hover:scale-110 transition-transform duration-300">
-                  {service.icon}
+                  {getServiceIcon(service.slug)}
                 </div>
                 {/* Title */}
                 <h3 className="text-lg font-bold text-brand-dark mb-3 group-hover:text-brand-orange transition-colors">

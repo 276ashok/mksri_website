@@ -4,15 +4,7 @@ import PageSEO from "@/components/PageSEO";
 import CTABanner from "@/components/CTABanner";
 import Services from "@/components/Services"; // Import the updated Services component
 import Testimonials from "@/components/Testimonials"; // Import Testimonials component
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
-import { Link } from "react-router-dom";
+
 import { Clock, CheckCircle, Hammer, UserCheck } from "lucide-react"; // Import icons
 
 const ServicesPage = () => {
@@ -26,19 +18,6 @@ const ServicesPage = () => {
 
 
       <div className="container mx-auto px-4 py-8 pt-20">
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Services</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
 
         {/* Core Services Grid / Card Layout - using the Services component with fullPage prop */}
         <Services fullPage={true} />
