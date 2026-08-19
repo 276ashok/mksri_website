@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import CTABanner from "@/components/CTABanner";
 import {
   MapPin,
   Mail,
@@ -112,7 +113,8 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-white overflow-hidden pb-16">
+    <>
+      <section className="bg-white overflow-hidden pb-16">
       {/* Redesigned Hero Section */}
       <section className="relative bg-[#F4F6F9] pt-12 pb-12 lg:py-0 min-h-fit lg:min-h-[500px] flex items-center overflow-hidden">
         {/* Layered Arrow Cut Accent Borders (Desktop only) */}
@@ -189,226 +191,233 @@ const Contact = () => {
 
       {/* Main Form & Info Grid section */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-          {/* Left Column: Form Card */}
-          <div className="lg:col-span-7">
-            <div className="bg-white border border-gray-150 rounded-2xl p-6 md:p-8 shadow-md">
-              <h2 className="text-2xl font-extrabold text-[#0B132B] mb-6 relative">
-                <span>Send Us a Message</span>
-                <span className="absolute left-0 bottom-[-8px] w-12 h-0.5 bg-brand-orange" />
-              </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Column 1: Form Card */}
+          <div className="md:col-span-2 lg:col-span-5 flex flex-col">
+            <div className="bg-white border border-gray-150 rounded-2xl p-6 md:p-8 shadow-md h-full flex flex-col justify-between">
+              <div>
+                <h2 className="text-2xl font-extrabold text-[#0B132B] mb-6 relative">
+                  <span>Send Us a Message</span>
+                  <span className="absolute left-0 bottom-[-8px] w-12 h-0.5 bg-brand-orange" />
+                </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-5 pt-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {/* Name Input */}
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                      <User size={16} />
+                <form onSubmit={handleSubmit} className="space-y-5 pt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {/* Name Input */}
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <User size={16} />
+                      </div>
+                      <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Full Name"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 placeholder-gray-400 font-medium"
+                      />
                     </div>
-                    <input
-                      type="text"
-                      id="fullName"
-                      placeholder="Full Name"
-                      value={formData.fullName}
+
+                    {/* Email Input */}
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <Mail size={16} />
+                      </div>
+                      <input
+                        type="email"
+                        id="email"
+                        placeholder="Email Address"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 placeholder-gray-400 font-medium"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {/* Phone Input */}
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <Phone size={16} />
+                      </div>
+                      <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Phone Number (Optional)"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 placeholder-gray-400 font-medium"
+                      />
+                    </div>
+
+                    {/* Subject Dropdown */}
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <Edit2 size={16} />
+                      </div>
+                      <select
+                        id="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 font-medium appearance-none"
+                      >
+                        <option>General Inquiry</option>
+                        <option>Construction Quote</option>
+                        <option>Survey Request</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Message TextArea */}
+                  <div className="relative">
+                    <div className="absolute top-3 left-3 text-gray-400">
+                      <MessageSquare size={16} />
+                    </div>
+                    <textarea
+                      id="message"
+                      rows={4}
+                      placeholder="Your Message"
+                      value={formData.message}
                       onChange={handleChange}
                       required
                       className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 placeholder-gray-400 font-medium"
-                    />
+                    ></textarea>
                   </div>
 
-                  {/* Email Input */}
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                      <Mail size={16} />
-                    </div>
-                    <input
-                      type="email"
-                      id="email"
-                      placeholder="Email Address"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 placeholder-gray-400 font-medium"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {/* Phone Input */}
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                      <Phone size={16} />
-                    </div>
-                    <input
-                      type="tel"
-                      id="phone"
-                      placeholder="Phone Number (Optional)"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 placeholder-gray-400 font-medium"
-                    />
-                  </div>
-
-                  {/* Subject Dropdown */}
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                      <Edit2 size={16} />
-                    </div>
-                    <select
-                      id="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 font-medium appearance-none"
+                  {/* Submit Actions */}
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-brand-orange hover:bg-[#0B132B] text-white font-bold text-xs md:text-sm py-3.5 px-8 rounded shadow hover:shadow-lg transition-all duration-200"
                     >
-                      <option>General Inquiry</option>
-                      <option>Construction Quote</option>
-                      <option>Survey Request</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                </div>
+                      <span>{isSubmitting ? "SENDING..." : "SEND MESSAGE"}</span>
+                      <Send size={14} />
+                    </button>
 
-                {/* Message TextArea */}
-                <div className="relative">
-                  <div className="absolute top-3 left-3 text-gray-400">
-                    <MessageSquare size={16} />
+                    <div className="flex items-center space-x-2 text-gray-400 text-xs font-semibold">
+                      <ShieldCheck size={16} className="text-brand-orange flex-shrink-0" />
+                      <span>We respect your privacy. Your information is safe with us.</span>
+                    </div>
                   </div>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    placeholder="Your Message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-lg text-xs md:text-sm text-brand-dark focus:outline-none focus:border-brand-orange focus:bg-white transition-all duration-200 placeholder-gray-400 font-medium"
-                  ></textarea>
-                </div>
-
-                {/* Submit Actions */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-brand-orange hover:bg-[#0B132B] text-white font-bold text-xs md:text-sm py-3.5 px-8 rounded shadow hover:shadow-lg transition-all duration-200"
-                  >
-                    <span>{isSubmitting ? "SENDING..." : "SEND MESSAGE"}</span>
-                    <Send size={14} />
-                  </button>
-
-                  <div className="flex items-center space-x-2 text-gray-400 text-xs font-semibold">
-                    <ShieldCheck size={16} className="text-brand-orange flex-shrink-0" />
-                    <span>We respect your privacy. Your information is safe with us.</span>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Contact Info & Map */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-6">
-              <h2 className="text-2xl font-extrabold text-[#0B132B] relative">
-                <span>Contact Information</span>
-                <span className="absolute left-0 bottom-[-8px] w-12 h-0.5 bg-brand-orange" />
-              </h2>
+          {/* Column 2: Contact Information */}
+          <div className="lg:col-span-4 flex flex-col space-y-6">
+            <h2 className="text-2xl font-extrabold text-[#0B132B] relative">
+              <span>Contact Information</span>
+              <span className="absolute left-0 bottom-[-8px] w-12 h-0.5 bg-brand-orange" />
+            </h2>
 
-              <div className="space-y-5 pt-4">
-                {/* Our Office */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
-                      Our Office
-                    </h3>
-                    <p className="text-brand-gray text-xs md:text-sm leading-relaxed mt-1 font-medium">
-                      MK Srinidhi Surveyors and Builders Pvt. Ltd.
-                      <br />
-                      53/3, Mitta Office Street, Krishnapuram,
-                      <br />
-                      Kadayanallur, Tenkasi District - 627759,
-                      <br />
-                      Tamil Nadu, India
-                    </p>
-                  </div>
+            <div className="space-y-5 pt-4 flex-grow">
+              {/* Our Office */}
+              <div className="flex items-start space-x-4">
+                <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
+                  <MapPin className="w-5 h-5" />
                 </div>
-
-                {/* Email Us */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
-                      Email Us
-                    </h3>
-                    <a
-                      href="mailto:info@mksribuilders.com"
-                      className="text-brand-orange hover:underline text-xs md:text-sm mt-1 font-medium block"
-                    >
-                      info@mksribuilders.com
-                    </a>
-                  </div>
+                <div>
+                  <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
+                    Our Office
+                  </h3>
+                  <p className="text-brand-gray text-xs md:text-sm leading-relaxed mt-1 font-medium">
+                    MK Srinidhi Surveyors and Builders Pvt. Ltd.
+                    <br />
+                    53/3, Mitta Office Street, Krishnapuram,
+                    <br />
+                    Kadayanallur, Tenkasi District - 627759,
+                    <br />
+                    Tamil Nadu, India
+                  </p>
                 </div>
+              </div>
 
-                {/* Call Us */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
-                      Call Us
-                    </h3>
-                    <a
-                      href="tel:+919597636766"
-                      className="text-[#0B132B] hover:text-brand-orange text-xs md:text-sm mt-1 font-bold block"
-                    >
-                      +91 9597636766
-                    </a>
-                  </div>
+              {/* Email Us */}
+              <div className="flex items-start space-x-4">
+                <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
+                  <Mail className="w-5 h-5" />
                 </div>
+                <div>
+                  <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
+                    Email Us
+                  </h3>
+                  <a
+                    href="mailto:info@mksribuilders.com"
+                    className="text-brand-orange hover:underline text-xs md:text-sm mt-1 font-medium block"
+                  >
+                    info@mksribuilders.com
+                  </a>
+                </div>
+              </div>
 
-                {/* Office Hours */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
-                    <Clock className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
-                      Office Hours
-                    </h3>
-                    <p className="text-brand-gray text-xs md:text-sm mt-1 font-medium leading-relaxed">
-                      Mon - Sat: 9:00 AM - 6:00 PM
-                      <br />
-                      Sunday: Closed
-                    </p>
-                  </div>
+              {/* Call Us */}
+              <div className="flex items-start space-x-4">
+                <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
+                    Call Us
+                  </h3>
+                  <a
+                    href="tel:+919597636766"
+                    className="text-[#0B132B] hover:text-brand-orange text-xs md:text-sm mt-1 font-bold block"
+                  >
+                    +91 9597636766
+                  </a>
+                </div>
+              </div>
+
+              {/* Office Hours */}
+              <div className="flex items-start space-x-4">
+                <div className="bg-brand-orange/10 text-brand-orange p-3 rounded-full flex-shrink-0 shadow-sm mt-0.5">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-[#0B132B] text-sm md:text-base leading-tight">
+                    Office Hours
+                  </h3>
+                  <p className="text-brand-gray text-xs md:text-sm mt-1 font-medium leading-relaxed">
+                    Mon - Sat: 9:00 AM - 6:00 PM
+                    <br />
+                    Sunday: Closed
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Column 3: Location Map */}
+          <div className="lg:col-span-3 flex flex-col space-y-6">
+            <h2 className="text-2xl font-extrabold text-[#0B132B] relative">
+              <span>Location Map</span>
+              <span className="absolute left-0 bottom-[-8px] w-12 h-0.5 bg-brand-orange" />
+            </h2>
 
             {/* Interactive Directions Map Card */}
-            <div className="relative rounded-2xl overflow-hidden shadow-md border border-gray-150 h-52 group bg-gray-100 flex items-center justify-center">
-              {/* Map background image outline */}
-              <div className="absolute inset-0 bg-cover bg-center opacity-30 select-none bg-[url('https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/77.3000,9.0000,12,0/500x300?access_token=pk.mock')]"></div>
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#0B132B]/20 to-transparent"></div>
+            <div className="relative rounded-2xl overflow-hidden shadow-md border border-gray-150 flex-grow h-64 lg:h-full min-h-[250px] bg-gray-100">
+              <iframe
+                title="MK Srinidhi Office Location Map"
+                src="https://maps.google.com/maps?q=9.092891659650133,77.34826548945186&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0 absolute inset-0"
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
               
-              {/* Giant compass marker */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -mt-4 bg-brand-orange text-white p-3 rounded-full shadow-lg border-2 border-white z-10 animate-bounce">
-                <MapPin className="w-6 h-6" />
-              </div>
-
               {/* Action Overlay Button */}
-              <div className="absolute bottom-5 left-4 right-4 z-20">
+              <div className="absolute bottom-4 left-4 right-4 z-20">
                 <a
-                  href="https://maps.google.com/?q=MK+Srinidhi+Surveyors+and+Builders+Kadayanallur+Tenkasi"
+                  href="https://maps.google.com/?q=9.092891659650133,77.34826548945186"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full inline-flex items-center justify-center space-x-2 bg-white text-[#0B132B] hover:bg-brand-orange hover:text-white font-extrabold text-xs py-3 px-5 rounded-lg shadow-md border border-gray-150 transition-all duration-200"
+                  className="w-full inline-flex items-center justify-center space-x-2 bg-white/95 backdrop-blur text-[#0B132B] hover:bg-brand-orange hover:text-white font-extrabold text-xs py-2.5 px-4 rounded-lg shadow-md border border-gray-150 transition-all duration-200"
                 >
-                  <Compass size={14} className="animate-spin-slow" />
+                  <Compass size={12} className="animate-spin-slow" />
                   <span>GET DIRECTIONS</span>
                 </a>
               </div>
@@ -465,44 +474,12 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Custom Conversion CTA Banner Block */}
-        <div className="mt-16">
-          <section className="bg-[#0B132B] text-white rounded-2xl overflow-hidden shadow-2xl p-8 md:p-12 relative border border-gray-800">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center divide-y lg:divide-y-0 lg:divide-x divide-gray-800">
-              <div className="lg:col-span-7 pr-0 lg:pr-8 space-y-3.5">
-                <h4 className="text-2xl md:text-3xl font-extrabold text-white">
-                  Ready to Start Your Project?
-                </h4>
-                <p className="text-gray-300 text-xs md:text-sm lg:text-base leading-relaxed">
-                  Let's turn your ideas into reality with precision and excellence. Contact our team to
-                  discuss your structural needs.
-                </p>
-              </div>
-
-              <div className="lg:col-span-5 pl-0 lg:pl-10 pt-6 lg:pt-0 flex flex-col sm:flex-row gap-4 justify-start lg:justify-center">
-                <a
-                  href="tel:+919597636766"
-                  className="inline-flex items-center justify-center space-x-2 bg-transparent hover:bg-white/10 text-white border border-white/30 font-bold text-xs md:text-sm py-3.5 px-6 rounded transition-all duration-200"
-                >
-                  <span>CALL US NOW</span>
-                </a>
-                <a
-                  href="#fullName"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById("fullName")?.focus();
-                  }}
-                  className="inline-flex items-center justify-center space-x-2 bg-brand-orange hover:bg-brand-orange/95 text-white font-bold text-xs md:text-sm py-3.5 px-6 rounded shadow hover:shadow-lg transition-all duration-200"
-                >
-                  <span>REQUEST A QUOTE</span>
-                  <span>&rarr;</span>
-                </a>
-              </div>
-            </div>
-          </section>
-        </div>
       </div>
     </section>
+
+    {/* Uniform CTABanner Component */}
+    <CTABanner />
+    </>
   );
 };
 

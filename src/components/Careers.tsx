@@ -5,50 +5,47 @@ import { useToast } from "@/components/ui/use-toast";
 import JobCard from "./careers/JobCard";
 import ApplicationForm, { ApplicationFormValues } from "./careers/ApplicationForm";
 import { useLocation } from "react-router-dom";
-import BenefitCarousel from "./careers/BenefitCarousel";
-import { API_BASE_URL } from '@/lib/constants'; // Import the API_BASE_URL
+import { API_BASE_URL } from '@/lib/constants';
+
+// Import Icons
+import {
+  Briefcase,
+  MapPin,
+  DollarSign,
+  Calendar,
+  Clock,
+  GraduationCap,
+  Users,
+  Heart,
+  TrendingUp,
+  Compass,
+  Mail,
+  Phone,
+  BookOpen,
+  Target,
+  CheckCircle2,
+  Coins,
+  Send,
+  ShieldCheck
+} from "lucide-react";
+
+// Import custom generated images
+import careersHero from "@/assets/images/careers_hero.png";
+import careersWhyWork from "@/assets/images/careers_why_work.png";
 
 // Define the JobOpening type based on the backend structure
 export interface JobOpening {
-  id: number; // Changed to number based on typical backend ID
+  id: number;
   title: string;
   location: string;
-  type?: string; // Assuming this might be a string like "Full-time", "Part-time"
+  type?: string;
   description: string;
   requirements?: string;
   salary_range?: string;
   is_active: boolean;
-  created_at: string; // Added based on backend models
-  updated_at: string; // Added based on backend models
+  created_at: string;
+  updated_at: string;
 }
-
-const benefitsData = [
-  {
-    title: "Competitive Salaries",
-    description: "We offer attractive compensation packages that recognize your skills and contributions.",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659L9 9.182m.347.879a2.105 2.105 0 010 2.976V15m0 0a3 3 0 003.003 3 3 3 0 003-3m-3 0h0" /></svg>
-  },
-  {
-    title: "Comprehensive Health Insurance",
-    description: "Your well-being is our priority. We provide extensive health coverage for you and your family.",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-  },
-  {
-    title: "Paid Time Off",
-    description: "Enjoy a healthy work-life balance with generous paid time off for vacations and personal needs.",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm10.5-6h.008v.008H18v-.008zm0 2.25h.008v.008H18V15zm0 2.25h.008v.008H18v-.008z" /></svg>
-  },
-  {
-    title: "Professional Development Opportunities",
-    description: "We invest in your growth with continuous learning programs, workshops, and career advancement paths.",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L13.5 21.75 15 13.5H3.75z" /></svg>
-  },
-  {
-    title: "Employee Assistance Program",
-    description: "Access confidential counseling and support services for personal and work-related challenges.",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.75c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0 7.5c-.276 0-.5-.446-.5-.999 0-.552.224-1 .5-1s.5.447.5 1c0 .553-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0 7.5c-.276 0-.5-.446-.5-.999 0-.552.224-1 .5-1s.5.447.5 1c0 .553-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zM12 18.75c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0 7.5c-.276 0-.5-.446-.5-.999 0-.552.224-1 .5-1s.5.447.5 1c0 .553-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0 7.5c-.276 0-.5-.446-.5-.999 0-.552.224-1 .5-1s.5.447.5 1c0 .553-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zM6 18.75c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0 7.5c-.276 0-.5-.446-.5-.999 0-.552.224-1 .5-1s.5.447.5 1c0 .553-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1zm0 7.5c-.276 0-.5-.446-.5-.999 0-.552.224-1 .5-1s.5.447.5 1c0 .553-.224 1-.5 1zm0-10.5c-.276 0-.5-.447-.5-.999 0-.553.224-1 .5-1s.5.447.5 1c0 .552-.224 1-.5 1z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25z" /></svg>
-  },
-];
 
 const Careers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,17 +67,15 @@ const Careers = () => {
   }, []);
 
   useEffect(() => {
-    // If there's a highlighted job ID, find and select that job
     if (highlightJobIdNum !== null && jobOpenings.length > 0) {
       const jobToHighlight = jobOpenings.find(job => job.id === highlightJobIdNum);
       if (jobToHighlight) {
-        // Scroll to the job card and highlight it
         setTimeout(() => {
           const element = document.getElementById(`job-${highlightJobId}`);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            element.classList.add('highlight-job');
-            setTimeout(() => element.classList.remove('highlight-job'), 2000);
+            element.classList.add('ring-2', 'ring-brand-orange');
+            setTimeout(() => element.classList.remove('ring-2', 'ring-brand-orange'), 2000);
           }
         }, 500);
       }
@@ -90,13 +85,11 @@ const Careers = () => {
   const fetchJobOpenings = async () => {
     setIsLoading(true);
     try {
-      // Fetch active job vacancies from the backend API
       const response = await fetch(`${API_BASE_URL}/job_vacancies.php?is_active=true`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data: JobOpening[] = await response.json();
-      
       setJobOpenings(data || []);
     } catch (error: any) {
       console.error("Error fetching job openings:", error);
@@ -114,6 +107,19 @@ const Careers = () => {
     setSelectedJob(job);
     setIsModalOpen(true);
     setSubmitError(null);
+  };
+
+  const handleGeneralApplyClick = () => {
+    handleApplyClick({
+      id: 0,
+      title: "General Application",
+      location: "Headquarters",
+      type: "Full-time",
+      description: "Submit your details and resume for future vacancy matches.",
+      is_active: true,
+      created_at: "",
+      updated_at: ""
+    });
   };
 
   const onSubmit = async (values: ApplicationFormValues) => {
@@ -137,7 +143,7 @@ const Careers = () => {
         throw new Error(errorData.detail || `Failed to upload resume: ${uploadResponse.statusText}`);
       }
       const uploadResult = await uploadResponse.json();
-      const resumePath = uploadResult.file_path; // Assuming backend returns the path
+      const resumePath = uploadResult.file_path;
 
       // 2. Submit application data to backend
       const applicationResponse = await fetch(`${API_BASE_URL}/career_applications.php`, {
@@ -151,7 +157,7 @@ const Careers = () => {
           phone: values.phone,
           resume_path: resumePath,
           job_title: values.job_title || selectedJob.title,
-          status: 'new' // Default status
+          status: 'new'
         }),
       });
         
@@ -160,7 +166,6 @@ const Careers = () => {
         throw new Error(errorData.detail || `Failed to submit application: ${applicationResponse.statusText}`);
       }
       
-      // Success!
       toast({
         title: "Application Submitted",
         description: "Your application has been successfully submitted. We'll be in touch soon!",
@@ -168,7 +173,6 @@ const Careers = () => {
       });
       
       setIsModalOpen(false);
-      
     } catch (error: any) {
       console.error("Error submitting application:", error);
       setSubmitError(error.message || "Failed to submit application. Please try again.");
@@ -178,56 +182,372 @@ const Careers = () => {
   };
 
   return (
-    <section id="careers" className="section-padding bg-gray-50">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
+    <div className="w-full bg-white">
+      {/* 1. Careers Hero Section */}
+      <section className="relative bg-[#F4F6F9] text-[#0B132B] min-h-fit lg:min-h-[580px] flex items-center overflow-hidden pt-12 pb-16 lg:py-0">
+        {/* Layered Arrow Cut Accent Borders (Desktop only) */}
+        {/* 1. Orange Accent Layer */}
+        <div
+          className="absolute right-0 top-0 bottom-0 h-full w-[52.8%] hidden lg:block bg-brand-orange z-0"
+          style={{ clipPath: "polygon(14% 0, 100% 0, 100% 100%, 14% 100%, 0% 50%)" }}
+        />
+        {/* 2. Navy Accent Layer */}
+        <div
+          className="absolute right-0 top-0 bottom-0 h-full w-[52.4%] hidden lg:block bg-[#0B132B] z-0"
+          style={{ clipPath: "polygon(14.5% 0, 100% 0, 100% 100%, 14.5% 100%, 0% 50%)" }}
+        />
+        {/* 3. Main Image Layer */}
+        <div
+          className="absolute right-0 top-0 bottom-0 h-full w-[52%] hidden lg:block overflow-hidden z-10"
+          style={{ clipPath: "polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 0% 50%)" }}
         >
-          <h1 className="section-title">Join Our Team</h1>
-          <p className="text-lg text-brand-gray max-w-3xl mx-auto mb-8">
-            Grow with MK Srinidhi Surveyors and Builders. Join our team of skilled professionals and be part of our journey to excellence.
-          </p>
-          <p className="text-lg text-brand-gray max-w-3xl mx-auto">
-            At MK Srinidhi, we foster a culture of innovation, collaboration, and continuous learning. We offer competitive salaries, comprehensive benefits, and opportunities for professional development.
-          </p>
-          <h2 className="text-2xl font-bold text-brand-dark mt-8 mb-4">Our Employee Benefits</h2>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mt-8"
-          >
-            <BenefitCarousel benefits={benefitsData} />
-          </motion.div>
-        </motion.div>
+          <img
+            src={careersHero}
+            alt="Construction professionals working on site"
+            className="w-full h-full object-cover animate-fade-in"
+          />
+        </div>
 
-        {isLoading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-primary"></div>
+        <div className="container mx-auto px-4 relative z-20 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Hero Column */}
+            <div className="lg:col-span-6 space-y-6 py-6 lg:py-16">
+              {/* Eyebrow */}
+              <div>
+                <span className="text-xs md:text-sm font-bold tracking-wider text-brand-orange uppercase block mb-2">
+                  CAREERS
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0B132B] leading-tight">
+                  Build Your Career. <br />
+                  Build the Future.
+                </h1>
+                <div className="w-16 h-1.5 bg-brand-orange mt-4"></div>
+              </div>
+
+              {/* Description */}
+              <p className="text-brand-gray text-base md:text-lg leading-relaxed max-w-lg">
+                At MK Srinidhi Surveyors and Builders, we believe our people are our greatest strength. Join a team that is shaping skylines, building communities, and making a lasting impact.
+              </p>
+
+              {/* Mobile Image (Visible only on mobile/tablet) */}
+              <div className="lg:hidden block w-full h-[250px] sm:h-[350px] rounded-lg overflow-hidden relative shadow-sm border border-gray-200">
+                <img
+                  src={careersHero}
+                  alt="Construction professionals working on site"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Floating Navy Features Panel (Desktop & Mobile) */}
+              <div className="bg-[#0B132B] text-white p-5 rounded-xl shadow-xl border border-gray-800 max-w-xl mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-850">
+                  {/* Growing Together */}
+                  <div className="flex items-start space-x-3 px-1 pb-3 sm:pb-0">
+                    <div className="flex-shrink-0 text-brand-orange mt-0.5">
+                      <Users className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-extrabold text-xs md:text-sm">Growing Together</h4>
+                      <p className="text-gray-400 text-[10px] md:text-xs leading-relaxed mt-0.5 font-medium">
+                        Be part of a team that values collaboration and mutual respect.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Learn & Grow */}
+                  <div className="flex items-start space-x-3 px-1 pt-3 sm:pt-0 pb-3 sm:pb-0">
+                    <div className="flex-shrink-0 text-brand-orange mt-0.5">
+                      <BookOpen className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-extrabold text-xs md:text-sm">Learn & Grow</h4>
+                      <p className="text-gray-400 text-[10px] md:text-xs leading-relaxed mt-0.5 font-medium">
+                        Opportunities for continuous learning and career growth.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Make an Impact */}
+                  <div className="flex items-start space-x-3 px-1 pt-3 sm:pt-0">
+                    <div className="flex-shrink-0 text-brand-orange mt-0.5">
+                      <Target className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-extrabold text-xs md:text-sm">Make an Impact</h4>
+                      <p className="text-gray-400 text-[10px] md:text-xs leading-relaxed mt-0.5 font-medium">
+                        Work on meaningful projects that shape the future.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        ) : jobOpenings.length === 0 ? (
-          <div className="text-center py-10">
-            <p className="text-xl text-gray-500">No job openings available at the moment.</p>
-            <p className="mt-2">Please check back later or contact us directly.</p>
+        </div>
+      </section>
+
+      {/* 2. Employee Benefits Section */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-[#0B132B] relative inline-block">
+              <span>Our Employee Benefits</span>
+              <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-12 h-0.5 bg-brand-orange" />
+            </h2>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {jobOpenings.map((job) => (
-              <JobCard 
-                key={job.id} 
-                job={job} 
-                handleApplyClick={handleApplyClick}
-                isHighlighted={job.id === highlightJobIdNum}
-              />
-            ))}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 pt-4">
+            {/* Competitive Salary */}
+            <div className="bg-white border border-gray-150 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 text-center flex flex-col justify-between h-full">
+              <div>
+                <div className="mx-auto w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center text-brand-orange mb-4">
+                  <Coins className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base mb-2">Competitive Salary</h3>
+                <p className="text-brand-gray text-[11px] md:text-xs leading-relaxed font-medium">
+                  We offer industry-competitive compensation and performance bonuses.
+                </p>
+              </div>
+            </div>
+
+            {/* Health & Wellness */}
+            <div className="bg-white border border-gray-150 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 text-center flex flex-col justify-between h-full">
+              <div>
+                <div className="mx-auto w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center text-brand-orange mb-4">
+                  <Heart className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base mb-2">Health & Wellness</h3>
+                <p className="text-brand-gray text-[11px] md:text-xs leading-relaxed font-medium">
+                  Comprehensive health insurance and wellness programs for you and your family.
+                </p>
+              </div>
+            </div>
+
+            {/* Paid Time Off */}
+            <div className="bg-white border border-gray-150 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 text-center flex flex-col justify-between h-full">
+              <div>
+                <div className="mx-auto w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center text-brand-orange mb-4">
+                  <Calendar className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base mb-2">Paid Time Off</h3>
+                <p className="text-brand-gray text-[11px] md:text-xs leading-relaxed font-medium">
+                  Enjoy generous paid leave, holidays, and work-life balance.
+                </p>
+              </div>
+            </div>
+
+            {/* Learning & Development */}
+            <div className="bg-white border border-gray-150 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 text-center flex flex-col justify-between h-full">
+              <div>
+                <div className="mx-auto w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center text-brand-orange mb-4">
+                  <GraduationCap className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base mb-2">Learning & Development</h3>
+                <p className="text-brand-gray text-[11px] md:text-xs leading-relaxed font-medium">
+                  Continuous learning programs, workshops, and certifications to ensure your growth.
+                </p>
+              </div>
+            </div>
+
+            {/* Supportive Culture */}
+            <div className="bg-white border border-gray-150 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 text-center flex flex-col justify-between h-full">
+              <div>
+                <div className="mx-auto w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center text-brand-orange mb-4">
+                  <Users className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base mb-2">Supportive Culture</h3>
+                <p className="text-brand-gray text-[11px] md:text-xs leading-relaxed font-medium">
+                  A collaborative and inclusive environment that encourages innovation.
+                </p>
+              </div>
+            </div>
+
+            {/* Career Advancement */}
+            <div className="bg-white border border-gray-150 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 text-center flex flex-col justify-between h-full">
+              <div>
+                <div className="mx-auto w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center text-brand-orange mb-4">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-[#0B132B] text-sm md:text-base mb-2">Career Advancement</h3>
+                <p className="text-brand-gray text-[11px] md:text-xs leading-relaxed font-medium">
+                  Clear career paths and opportunities to grow with us.
+                </p>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      </section>
+
+      {/* 3. Why Work With Us Section */}
+      <section className="py-16 bg-gray-50 border-t border-b border-gray-150">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="bg-white border border-gray-150 rounded-2xl p-6 md:p-10 shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Column Image */}
+              <div className="lg:col-span-5">
+                <img
+                  src={careersWhyWork}
+                  alt="Team achieving collaborative success at sunset"
+                  className="rounded-xl shadow-md border border-gray-150 w-full object-cover h-64 md:h-80"
+                />
+              </div>
+
+              {/* Right Column Content */}
+              <div className="lg:col-span-7 space-y-6">
+                <div>
+                  <h2 className="text-3xl font-extrabold text-[#0B132B] relative inline-block">
+                    <span>Why Work With Us?</span>
+                    <span className="absolute left-0 bottom-[-10px] w-12 h-0.5 bg-brand-orange" />
+                  </h2>
+                </div>
+
+                <p className="text-brand-gray text-xs md:text-sm leading-relaxed font-medium">
+                  We are more than just a construction and surveying company — we are problem solvers, innovators, and builders of a better tomorrow. Here, your ideas are valued, your growth is supported, and your work truly matters.
+                </p>
+
+                <ul className="space-y-3 pt-2">
+                  <li className="flex items-start space-x-3 text-xs md:text-sm font-semibold text-brand-dark">
+                    <CheckCircle2 className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                    <span>Work on diverse and challenging projects</span>
+                  </li>
+                  <li className="flex items-start space-x-3 text-xs md:text-sm font-semibold text-brand-dark">
+                    <CheckCircle2 className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                    <span>Modern tools, technology, and processes</span>
+                  </li>
+                  <li className="flex items-start space-x-3 text-xs md:text-sm font-semibold text-brand-dark">
+                    <CheckCircle2 className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                    <span>Mentorship from experienced professionals</span>
+                  </li>
+                  <li className="flex items-start space-x-3 text-xs md:text-sm font-semibold text-brand-dark">
+                    <CheckCircle2 className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
+                    <span>A culture built on integrity, respect, and excellence</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Current Openings Section */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-[#0B132B] relative inline-block">
+              <span>Current Openings</span>
+              <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-12 h-0.5 bg-brand-orange" />
+            </h2>
+          </div>
+
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-orange"></div>
+            </div>
+          ) : jobOpenings.length === 0 ? (
+            /* Mockup-Accurate Empty State Card */
+            <div className="bg-gray-50 border border-gray-150 rounded-2xl p-6 md:p-10 shadow-sm">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                {/* Left Briefcase Accent */}
+                <div className="md:col-span-3 flex justify-center">
+                  <div className="w-24 h-24 rounded-full border-2 border-dashed border-brand-orange/40 flex items-center justify-center bg-white shadow-inner">
+                    <Briefcase className="w-10 h-10 text-brand-orange" />
+                  </div>
+                </div>
+
+                {/* Center Copy */}
+                <div className="md:col-span-5 text-center md:text-left space-y-4">
+                  <h3 className="text-xl md:text-2xl font-extrabold text-[#0B132B]">
+                    No Job Openings Available
+                  </h3>
+                  <p className="text-brand-gray text-xs md:text-sm font-medium leading-relaxed">
+                    We don't have any open positions at the moment. Please check back later or send us your resume at{" "}
+                    <a
+                      href="mailto:info@mksribuilders.com"
+                      className="text-brand-orange font-bold hover:underline"
+                    >
+                      info@mksribuilders.com
+                    </a>. We'd love to hear from you!
+                  </p>
+                </div>
+
+                {/* Right Workspace Vector Line Illustration */}
+                <div className="md:col-span-4 hidden md:flex justify-center select-none">
+                  <svg className="w-48 h-36 text-gray-300 stroke-current fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 200 150">
+                    <path d="M20 120h160" />
+                    <path d="M100 100v20m-15 0h30" />
+                    <rect x="70" y="55" width="60" height="45" rx="3" />
+                    <path d="M85 112h30" />
+                    <path d="M50 115v-35c0-8 6-12 12-12h5" />
+                    <path d="M45 115h25" />
+                    <path d="M57 115v15m-10 0h20" />
+                    <path d="M152 120l2-12h12l2 12z" />
+                    <path d="M158 108c-2-8-6-10-6-10s6 2 8 10" />
+                    <path d="M158 108c2-8 6-10 6-10s-6 2-8 10" />
+                    <path d="M158 108c0-12 0-15 0-15s3 5 0 15" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {jobOpenings.map((job) => (
+                <JobCard 
+                  key={job.id} 
+                  job={job} 
+                  handleApplyClick={handleApplyClick}
+                  isHighlighted={job.id === highlightJobIdNum}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 5. Bottom Dark Navy Career Contact CTA Section */}
+      <section className="bg-[#0B132B] text-white py-12 border-t border-gray-800">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-gray-800">
+            {/* Left Block: Resume Submission */}
+            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-5 pb-8 md:pb-0 md:pr-10">
+              <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-md">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div className="space-y-3 text-center sm:text-left flex-grow">
+                <h3 className="text-lg md:text-xl font-extrabold text-white">Don’t see the right role?</h3>
+                <p className="text-gray-400 text-xs md:text-sm leading-relaxed font-medium">
+                  We’re always looking for talented and passionate people. Send us your resume and let’s build the future together.
+                </p>
+                <button
+                  onClick={handleGeneralApplyClick}
+                  className="inline-flex items-center justify-center space-x-2 bg-white text-[#0B132B] hover:bg-brand-orange hover:text-white font-extrabold text-xs py-3 px-6 rounded-lg transition-all duration-200 border border-transparent shadow"
+                >
+                  <span>SEND RESUME</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Right Block: General Questions */}
+            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-5 pt-8 md:pt-0 md:pl-10">
+              <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-md">
+                <Phone className="w-6 h-6" />
+              </div>
+              <div className="space-y-2 text-center sm:text-left">
+                <h3 className="text-lg md:text-xl font-extrabold text-white">Have Questions?</h3>
+                <p className="text-gray-400 text-xs md:text-sm leading-relaxed font-medium">
+                  We’re here to help you with your career queries.
+                </p>
+                <a
+                  href="tel:+919597636766"
+                  className="text-brand-orange hover:underline text-lg md:text-xl font-bold block pt-1"
+                >
+                  +91 9597636766
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {selectedJob && (
         <Modal
@@ -244,7 +564,7 @@ const Careers = () => {
           />
         </Modal>
       )}
-    </section>
+    </div>
   );
 };
 

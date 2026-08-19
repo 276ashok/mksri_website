@@ -4,6 +4,7 @@ import Layout from "@/components/Layout";
 import PageSEO from "@/components/PageSEO";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import { servicesData } from "@/data/servicesData";
+import CTABanner from "@/components/CTABanner";
 
 import {
   Compass,
@@ -23,7 +24,6 @@ import {
   ArrowRight,
   Check,
   Smile,
-  Users,
   LayoutGrid,
   ChevronDown,
 } from "lucide-react";
@@ -240,7 +240,7 @@ const ServiceDetailPage = () => {
               <div>
                 <h3 className="text-xl font-bold text-white mb-2">Equipment We Use</h3>
                 <p className="text-gray-400 text-xs mb-6">Advanced technology for accurate and efficient execution</p>
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {service.equipment.map((eq, idx) => (
                     <div key={idx} className="bg-[#1C2541] border border-gray-800 rounded-lg p-4 text-center space-y-3 flex flex-col justify-between">
@@ -350,9 +350,8 @@ const ServiceDetailPage = () => {
                       <span>{faq.question}</span>
                       <ChevronDown
                         size={16}
-                        className={`text-gray-400 transform transition-transform duration-200 ${
-                          isOpen ? "rotate-180 text-brand-orange" : ""
-                        }`}
+                        className={`text-gray-400 transform transition-transform duration-200 ${isOpen ? "rotate-180 text-brand-orange" : ""
+                          }`}
                       />
                     </button>
                     {isOpen && (
@@ -399,79 +398,12 @@ const ServiceDetailPage = () => {
           </div>
 
           {/* Custom Enquiry / Call Us Conversion Banner Block */}
-          <div className="mt-16">
-            <section className="bg-[#0B132B] text-white rounded-2xl overflow-hidden shadow-2xl p-8 md:p-12 relative border border-gray-800">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center divide-y lg:divide-y-0 lg:divide-x divide-gray-800">
-                {/* Have a Project block */}
-                <div className="lg:col-span-7 pr-0 lg:pr-8 space-y-3.5">
-                  <h4 className="text-2xl md:text-3xl font-extrabold text-white">
-                    {service.ctaBanner.title}
-                  </h4>
-                  <p className="text-gray-300 text-xs md:text-sm lg:text-base leading-relaxed">
-                    {service.ctaBanner.description}
-                  </p>
-                </div>
+      </div>
+    </section>
 
-                {/* Enquiry Actions button block */}
-                <div className="lg:col-span-5 pl-0 lg:pl-10 pt-6 lg:pt-0 flex flex-col sm:flex-row gap-4 justify-start lg:justify-center">
-                  <a
-                    href="tel:+919597636766"
-                    className="inline-flex items-center justify-center space-x-2 bg-transparent hover:bg-white/10 text-white border border-white/30 font-bold text-xs md:text-sm py-3.5 px-6 rounded transition-all duration-200"
-                  >
-                    <span>CALL US NOW</span>
-                  </a>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center justify-center space-x-2 bg-brand-orange hover:bg-brand-orange/95 text-white font-bold text-xs md:text-sm py-3.5 px-6 rounded shadow hover:shadow-lg transition-all duration-200"
-                  >
-                    <span>REQUEST A QUOTE</span>
-                    <span>&rarr;</span>
-                  </Link>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          {/* Bottom Statistics strip */}
-          <div className="bg-white text-[#0B132B] py-8 rounded-2xl border border-gray-150 shadow-md max-w-5xl mx-auto mt-16">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 divide-y-0 divide-x-0 lg:divide-x lg:divide-gray-150">
-              <div className="flex items-center space-x-3.5 justify-center px-4">
-                <Compass className="w-8 h-8 text-[#0B132B]" />
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-brand-orange leading-tight">10+</div>
-                  <div className="text-xs text-gray-500 font-bold">Years of Experience</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3.5 justify-center px-4">
-                <Building2 className="w-8 h-8 text-[#0B132B]" />
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-brand-orange leading-tight">500+</div>
-                  <div className="text-xs text-gray-500 font-bold">Projects Completed</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3.5 justify-center px-4">
-                <HardHat className="w-8 h-8 text-[#0B132B]" />
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-brand-orange leading-tight">50+</div>
-                  <div className="text-xs text-gray-500 font-bold">Expert Professionals</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3.5 justify-center px-4">
-                <Users className="w-8 h-8 text-[#0B132B]" />
-                <div>
-                  <div className="text-2xl md:text-3xl font-extrabold text-brand-orange leading-tight">100%</div>
-                  <div className="text-xs text-gray-500 font-bold">Client Satisfaction</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-    </Layout>
+    {/* Uniform CTABanner Component */}
+    <CTABanner title={service.ctaBanner.title} description={service.ctaBanner.description} />
+  </Layout>
   );
 };
 

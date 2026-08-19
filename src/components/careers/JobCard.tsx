@@ -1,8 +1,7 @@
-
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Button } from "../ui/button";
 import { JobOpening } from "../Careers";
+import { MapPin, Briefcase, DollarSign } from "lucide-react";
 
 type JobCardProps = {
   job: JobOpening;
@@ -14,17 +13,12 @@ const JobCard = ({ job, handleApplyClick, isHighlighted = false }: JobCardProps)
   const cardRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Apply highlight effect if the job is highlighted
     if (isHighlighted && cardRef.current) {
       cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      
-      // Add a temporary highlight class
-      cardRef.current.classList.add('ring-4', 'ring-brand-primary', 'ring-opacity-50');
-      
-      // Remove the highlight after a delay
+      cardRef.current.classList.add('ring-2', 'ring-brand-orange');
       setTimeout(() => {
         if (cardRef.current) {
-          cardRef.current.classList.remove('ring-4', 'ring-brand-primary', 'ring-opacity-50');
+          cardRef.current.classList.remove('ring-2', 'ring-brand-orange');
         }
       }, 3000);
     }
@@ -34,43 +28,49 @@ const JobCard = ({ job, handleApplyClick, isHighlighted = false }: JobCardProps)
     <motion.div
       ref={cardRef}
       id={`job-${job.id}`}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-      className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl cursor-pointer"
+      className="bg-white rounded-xl shadow-md border border-gray-150 p-6 md:p-8 hover:shadow-lg transition-all duration-300 w-full"
     >
-      <div className="p-6">
-        <h3 className="text-2xl font-extrabold text-brand-primary mb-2">{job.title}</h3>
-        <div className="flex flex-wrap gap-2 mb-4">
-          <span className="bg-brand-light text-brand-primary text-xs font-semibold px-3 py-1 rounded-full">
-            {job.location}
-          </span>
-          {job.type && (
-            <span className="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">
-              {job.type}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="space-y-3 flex-grow">
+          <h3 className="text-xl md:text-2xl font-extrabold text-[#0B132B]">{job.title}</h3>
+          
+          <div className="flex flex-wrap gap-4 text-xs md:text-sm text-gray-500 font-semibold">
+            <span className="flex items-center">
+              <MapPin className="w-4 h-4 mr-1.5 text-brand-orange" />
+              {job.location}
             </span>
-          )}
-          {job.salary_range && (
-            <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
-              {job.salary_range}
-            </span>
-          )}
-        </div>
-        <p className="text-gray-600 mb-4">{job.description}</p>
-        {job.requirements && (
-          <div className="mb-4">
-            <strong className="text-sm text-gray-700">Requirements:</strong>
-            <p className="text-gray-600">{job.requirements}</p>
+            {job.type && (
+              <span className="flex items-center">
+                <Briefcase className="w-4 h-4 mr-1.5 text-brand-orange" />
+                {job.type}
+              </span>
+            )}
+            {job.salary_range && (
+              <span className="flex items-center">
+                <DollarSign className="w-4 h-4 mr-1.5 text-brand-orange" />
+                {job.salary_range}
+              </span>
+            )}
           </div>
-        )}
-        <Button
-          onClick={() => handleApplyClick(job)}
-          className="w-full"
-        >
-          Apply Now
-        </Button>
+          
+          <p className="text-brand-gray text-xs md:text-sm leading-relaxed max-w-3xl">
+            {job.description}
+          </p>
+        </div>
+        
+        <div className="flex-shrink-0 self-start md:self-center">
+          <button
+            onClick={() => handleApplyClick(job)}
+            className="inline-flex items-center space-x-1.5 text-brand-orange hover:text-[#0B132B] font-extrabold text-sm group"
+          >
+            <span>View Position</span>
+            <span className="transform transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </button>
+        </div>
       </div>
     </motion.div>
   );

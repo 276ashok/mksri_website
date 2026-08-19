@@ -282,7 +282,7 @@ const ProjectsPage = () => {
               </div>
               <div>
                 <div className="text-2xl md:text-3xl font-extrabold text-brand-orange leading-tight">
-                  10+
+                  8+
                 </div>
                 <div className="text-xs text-gray-500 font-bold tracking-wide">
                   Years of Experience

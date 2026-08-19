@@ -105,7 +105,7 @@ const AboutPage = () => {
                     </div>
                     <div>
                       <div className="text-xl md:text-2xl font-bold text-white leading-none">
-                        10+
+                        8+
                       </div>
                       <div className="text-[10px] md:text-[11px] text-gray-400 font-medium mt-1 leading-tight">
                         Years of Experience
@@ -445,9 +445,9 @@ const AboutPage = () => {
               <div className="text-brand-orange flex justify-center md:justify-start">
                 <Calendar className="w-10 h-10" />
               </div>
-              <h3 className="font-bold text-brand-dark text-base">10+ Years of Experience</h3>
+              <h3 className="font-bold text-brand-dark text-base">8+ Years of Experience</h3>
               <p className="text-brand-gray text-xs md:text-sm leading-relaxed">
-                A decade of proven expertise in diverse construction and surveying projects.
+                Over 8 years of proven expertise in diverse construction and surveying projects.
               </p>
             </div>
 
